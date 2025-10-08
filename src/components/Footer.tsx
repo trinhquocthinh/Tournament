@@ -31,25 +31,37 @@ export default function Footer() {
             <ul className="social-list">
               <li>
                 <Link href="https://facebook.com" className="social-link">
-                  <ion-icon name="logo-facebook"></ion-icon>
+                  <ion-icon
+                    name="logo-facebook"
+                    suppressHydrationWarning
+                  ></ion-icon>
                 </Link>
               </li>
 
               <li>
                 <Link href="https://twitter.com" className="social-link">
-                  <ion-icon name="logo-twitter"></ion-icon>
+                  <ion-icon
+                    name="logo-twitter"
+                    suppressHydrationWarning
+                  ></ion-icon>
                 </Link>
               </li>
 
               <li>
                 <Link href="https://instagram.com" className="social-link">
-                  <ion-icon name="logo-instagram"></ion-icon>
+                  <ion-icon
+                    name="logo-instagram"
+                    suppressHydrationWarning
+                  ></ion-icon>
                 </Link>
               </li>
 
               <li>
                 <Link href="https://youtube.com" className="social-link">
-                  <ion-icon name="logo-youtube"></ion-icon>
+                  <ion-icon
+                    name="logo-youtube"
+                    suppressHydrationWarning
+                  ></ion-icon>
                 </Link>
               </li>
             </ul>

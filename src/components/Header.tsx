@@ -19,7 +19,7 @@ export default function Header() {
 
   const isActiveLink = (href: string) => {
     if (href.startsWith('/#')) {
-      return pathname === '/' && href.includes(pathname);
+      return pathname === '/' && href.includes('/#home');
     }
     return pathname === href || pathname.startsWith(href + '/');
   };

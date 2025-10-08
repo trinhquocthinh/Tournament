@@ -6,7 +6,7 @@ export const navLinks: NavLink[] = [
     label: 'home',
   },
   {
-    href: '/tournament',
+    href: '/#tournament',
     label: 'tournament',
   },
   {
@@ -14,11 +14,7 @@ export const navLinks: NavLink[] = [
     label: 'news',
   },
   {
-    href: '/article',
-    label: 'blog',
-  },
-  {
-    href: '/#join',
-    label: 'join',
+    href: '/#blogs',
+    label: 'contact',
   },
 ];

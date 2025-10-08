@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-page-custom-font */
+/* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from 'next';
-import Script from 'next/script';
 
 import Layout from '@/components/Layout';
 import { defaultMetadata } from '@/config/seo';
@@ -26,18 +26,28 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=Work+Sans:wght@600&display=swap"
           rel="stylesheet"
         />
-      </head>
-      <body>
-        <Layout>{children}</Layout>
+
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* Favicon fallback */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.svg" />
+
         {/* Ionicons */}
-        <Script
+        <script
+          type="module"
           src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-          strategy="afterInteractive"
+          async
         />
-        <Script
+        <script
+          noModule
           src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-          strategy="afterInteractive"
+          async
         />
+      </head>
+      <body suppressHydrationWarning>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

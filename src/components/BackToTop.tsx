@@ -21,7 +21,11 @@ export default function BackToTop() {
         scrollToTop();
       }}
     >
-      <ion-icon name="arrow-up-outline" aria-hidden="true"></ion-icon>
+      <ion-icon
+        name="arrow-up-outline"
+        aria-hidden="true"
+        suppressHydrationWarning
+      ></ion-icon>
     </a>
   );
 }

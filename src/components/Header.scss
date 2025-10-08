@@ -1,48 +1,6 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
 
-.header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-block: 18px;
-  background-color: transparent;
-  z-index: 4;
-  transition: $transition-1;
-
-  .container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .logo {
-    flex-shrink: 0;
-
-    img {
-      width: 120px;
-      transition: $transition-1;
-    }
-  }
-
-  .btn {
-    display: none;
-    margin-inline-start: auto;
-
-    @include laptop-up {
-      display: grid;
-    }
-  }
-
-  &.active {
-    position: fixed;
-    background-color: $bg-oxford-blue-alpha-95;
-    box-shadow: 0 18px 40px -25px hsla(240, 63%, 13%, 0.9);
-    animation: slideDown 300ms ease forwards;
-  }
-}
-
 @keyframes slideDown {
   0% {
     transform: translateY(-100%);
@@ -52,18 +10,55 @@
   }
 }
 
-.nav-toggle-btn {
-  display: grid;
-  gap: 6px;
-  margin-inline-start: auto;
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-block: 18px;
+  z-index: 4;
+  transition: $transition-1;
+  background-color: $bg-oxford-blue-alpha-95;
+  box-shadow: 0 18px 40px -25px hsla(240, 63%, 13%, 0.9);
 
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @include mobile-up {
+    .logo {
+      img {
+        width: 160px;
+      }
+    }
+  }
+
+  .btn {
+    display: none;
+
+    @include laptop-up {
+      display: grid;
+      text-align: center;
+    }
+  }
+
+  &.active {
+    position: fixed;
+    animation: slideDown 300ms ease forwards;
+  }
+}
+
+.nav-toggle-btn {
   @include laptop-up {
     display: none;
   }
 
   .line {
-    width: 26px;
-    height: 2px;
+    height: 3px;
+    width: 10px;
+    margin-block: 4px;
     background-color: $text-gainsboro;
     border-radius: 8px;
     transition: $transition-1;
@@ -105,38 +100,23 @@
 
   @include laptop-up {
     all: unset;
-    margin-inline: auto 20px;
-    visibility: visible;
+    display: block;
   }
 
   &.active {
     clip-path: $clip-path-2;
     visibility: visible;
+
+    @include laptop-up {
+      all: unset;
+      display: block;
+    }
   }
 }
 
 .navbar-list {
   @include laptop-up {
     display: flex;
-    gap: 25px;
-  }
-}
-
-.navbar-link {
-  padding: 12px 25px;
-  text-transform: uppercase;
-  font-size: $font-size-7;
-  font-weight: $font-weight-semi-bold;
-  color: $text-white;
-  transition: $transition-1;
-
-  @include laptop-up {
-    padding: 0;
-  }
-
-  &:is(:hover, :focus-visible),
-  &.active {
-    color: $text-purple;
   }
 }
 
@@ -153,5 +133,19 @@
     @include laptop-up {
       border: none;
     }
+  }
+}
+
+.navbar-link {
+  padding: 12px 25px;
+  text-transform: uppercase;
+  font-size: $font-size-7;
+  font-weight: $font-weight-semi-bold;
+  color: $text-white;
+  transition: $transition-1;
+
+  &:is(:hover, :focus-visible),
+  &.active {
+    color: $text-purple;
   }
 }

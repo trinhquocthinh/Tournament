@@ -5,6 +5,7 @@ declare namespace JSX {
       class?: string;
       'aria-hidden'?: string | boolean;
       style?: React.CSSProperties;
+      suppressHydrationWarning?: boolean;
     };
   }
 }
