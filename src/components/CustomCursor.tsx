@@ -4,7 +4,7 @@ import { useCursor } from '@/hooks/useCursor';
 import './CustomCursor.scss';
 
 export default function CustomCursor() {
-  useCursor();
+  const cursorRef = useCursor();
 
-  return <div className="cursor" data-cursor></div>;
+  return <div ref={cursorRef} className="cursor" data-cursor></div>;
 }

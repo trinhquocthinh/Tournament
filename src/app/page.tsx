@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import HeroSection from '@/components/sections/HeroSection';
+import UpcomingSection from '@/components/sections/UpcomingSection';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -11,7 +12,7 @@ export default function HomePage() {
   return (
     <article>
       <HeroSection />
-      {/* Other sections will be added */}
+      <UpcomingSection />
     </article>
   );
 }

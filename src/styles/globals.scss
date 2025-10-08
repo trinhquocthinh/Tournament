@@ -266,6 +266,11 @@ body {
   .container {
     max-width: 720px;
   }
+
+  .h1 {
+    line-height: 1;
+    font-size: 6.5rem;
+  }
 }
 
 @include laptop-up {
