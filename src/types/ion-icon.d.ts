@@ -1,16 +1,10 @@
-// Ion Icon Type Declaration
-/* eslint-disable no-unused-vars */
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'ion-icon': {
-        name: string;
-        'aria-hidden'?: boolean;
-        class?: string;
-        size?: string;
-      };
-    }
+declare namespace JSX {
+  interface IntrinsicElements {
+    'ion-icon': {
+      name?: string;
+      class?: string;
+      'aria-hidden'?: string | boolean;
+      style?: React.CSSProperties;
+    };
   }
 }
-
-export {};

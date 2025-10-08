@@ -4,20 +4,21 @@ import { useState, useEffect } from 'react';
 
 export const useScroll = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [isAtTop, setIsAtTop] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrollY(currentScrollY);
-      setIsAtTop(currentScrollY <= 100);
+      setIsScrolled(currentScrollY > 100);
     };
 
-    handleScroll(); // Initial check
-    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return { scrollY, isAtTop };
+  return { scrollY, isScrolled };
 };

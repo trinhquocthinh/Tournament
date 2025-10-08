@@ -1,6 +1,6 @@
 {
-  "name": "adex-agency-website",
-  "version": "1.0.10",
+  "name": "tournament-website",
+  "version": "1.0.0",
   "private": true,
   "packageManager": "yarn@1.22.19",
   "scripts": {
@@ -28,7 +28,6 @@
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
-    "framer-motion": "^11.0.3",
     "next": "^14.0.4",
     "next-seo": "^6.8.0",
     "next-sitemap": "^4.2.3",

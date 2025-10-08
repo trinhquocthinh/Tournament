@@ -1,237 +1,275 @@
-# Adex Digital Studio - Agency Website
+# Tournament Gaming Website - Next.js Conversion
 
-A modern, responsive agency website built with Next.js 14, TypeScript, and SCSS. This project showcases digital services, portfolio projects, and provides a professional online presence for Adex Digital Studio.
+This project has been converted from static HTML to Next.js 14 with TypeScript and SCSS, following the architecture patterns defined in `agent.md`.
 
-## 🚀 Features
+## 🚀 Project Status
 
-- **Server-Side Rendering (SSR)** with Next.js 14
-- **TypeScript** for type safety and better developer experience
-- **SCSS Modules** for component-scoped styling
-- **Responsive Design** optimized for all devices
-- **SEO Optimized** with Next.js Metadata API & next-seo
-- **Image Optimization** with Next.js Image component (AVIF/WebP)
-- **Interactive Components** with smooth animations
-- **Modern Performance** with optimized loading and caching
-- **Security Hardened** with comprehensive security headers
-- **Code Quality** with ESLint, TypeScript, and Prettier
+The conversion includes:
 
-## 🛠 Tech Stack
+✅ **Completed:**
 
-- **Framework:** Next.js 14
-- **Language:** TypeScript
-- **Styling:** SCSS/Sass with CSS Modules
-- **Icons:** Ionicons
-- **Fonts:** Google Fonts (Manrope)
-- **Package Manager:** Yarn
-- **Linting:** ESLint + Prettier
-- **SEO:** next-seo, next-sitemap
-- **Validation:** Zod
-- **Development:** Hot reload with Next.js dev server
+- Next.js 14 project structure with App Router
+- TypeScript configuration with path aliases
+- SCSS variables and mixins system
+- Custom React hooks (useScroll, useNavbar, useCursor, useReveal, useTournamentTabs, useButtonRipple)
+- Reusable components (Header, Footer, Layout, BackToTop, CustomCursor)
+- SEO configuration and metadata
+- Data files for navigation, matches, news, benefits
+- Root layout with global styles
+- Home, Tournament, and Article page structures
+- Sitemap and Robots.txt generation
+- Security headers configuration
 
-## 📚 Documentation
+## 📦 Installation
 
-- **[QUICK-REFERENCE.md](QUICK-REFERENCE.md)** - Quick reference guide (English/Tiếng Việt)
-- **[OPTIMIZATION-SUMMARY.md](OPTIMIZATION-SUMMARY.md)** - Full optimization summary
-- **[TOM-TAT-TOI-UU.md](TOM-TAT-TOI-UU.md)** - Tóm tắt tối ưu hóa (Tiếng Việt)
-- **[docs/CONFIGURATION.md](docs/CONFIGURATION.md)** - Complete configuration guide
-- **[docs/RECOMMENDED-PACKAGES.md](docs/RECOMMENDED-PACKAGES.md)** - Additional packages guide
-- **[docs/RELEASE.md](docs/RELEASE.md)** - Release workflow documentation
+1. **Install dependencies:**
 
-## 📁 Project Structure
-
-```
-src/
-├── app/                    # Next.js 14 App Router
-│   ├── layout.tsx         # Root layout with metadata
-│   ├── page.tsx           # Home page
-│   ├── about/             # About page
-│   ├── services/          # Services page
-│   ├── projects/          # Projects page
-│   ├── blog/              # Blog page
-│   └── contact/           # Contact page
-├── components/            # Reusable React components
-│   ├── Header.tsx         # Navigation header
-│   ├── Footer.tsx         # Site footer
-│   ├── Layout.tsx         # Page layout wrapper
-│   └── sections/          # Page sections
-│       └── home/          # Home page sections
-├── hooks/                 # Custom React hooks
-│   ├── useScroll.ts       # Scroll position hook
-│   ├── useSlider.ts       # Image slider hook
-│   └── useAccordion.ts    # Accordion functionality
-├── styles/                # Global styles and utilities
-│   ├── globals.scss       # Global styles
-│   ├── _variables.scss    # SCSS variables
-│   └── _mixins.scss       # SCSS mixins
-├── types/                 # TypeScript type definitions
-│   ├── index.ts           # Main type definitions
-│   └── ion-icon.d.ts      # Ionicons type declarations
-└── utils/                 # Utility functions
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18.x or later
-- npm or yarn package manager
-
-### Installation
-
-1. **Clone the repository**
    ```bash
-   git clone https://github.com/trinhquocthinh/Agency.git
-   cd agency-website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
    yarn install
+   # or
+   npm install
    ```
 
-3. **Start the development server**
+2. **Start the development server:**
+
    ```bash
    yarn dev
    # or
-   yarn dev
+   npm run dev
    ```
 
-4. **Open your browser**
+3. **Open your browser:**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 📝 Available Scripts
+## 🏗️ Project Structure
 
-### Development
-- `yarn dev` - Start development server
-- `yarn build` - Build for production
-- `yarn start` - Start production server
-
-### Code Quality
-- `yarn lint` - Run ESLint
-- `yarn lint:fix` - Fix ESLint issues
-- `yarn lint:strict` - Run ESLint with no warnings allowed
-- `yarn type-check` - Run TypeScript type checking
-- `yarn format` - Format code with Prettier
-- `yarn format:check` - Check code formatting
-
-### Release Management
-- `yarn release` - Create a patch release (1.0.0 → 1.0.1)
-- `yarn release:patch` - Create a patch release
-- `yarn release:minor` - Create a minor release (1.0.0 → 1.1.0)
-- `yarn release:major` - Create a major release (1.0.0 → 2.0.0)
-
-### Utilities
-- `yarn clean` - Clean build directories
-- `yarn analyze` - Analyze bundle size
-
-See [docs/RELEASE.md](docs/RELEASE.md) for detailed release workflow documentation.
-
-## 🎨 Customization
-
-### Colors & Branding
-
-Update brand colors in `src/styles/_variables.scss`:
-
-```scss
-// Primary brand colors
-$violet-blue-crayola: hsla(234, 50%, 64%, 1);
-$charcoal: hsla(218, 22%, 26%, 1);
-$white: hsla(0, 0%, 100%, 1);
+```
+tournament-website/
+├── public/
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── images/
+│   │   └── js/
+│   └── favicon.svg
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx          # Root layout
+│   │   ├── page.tsx            # Home page
+│   │   ├── robots.ts           # Dynamic robots.txt
+│   │   ├── sitemap.ts          # Dynamic sitemap
+│   │   ├── article/
+│   │   │   └── page.tsx
+│   │   └── tournament/
+│   │       └── page.tsx
+│   ├── components/
+│   │   ├── Header.tsx
+│   │   ├── Header.scss
+│   │   ├── Footer.tsx
+│   │   ├── Footer.scss
+│   │   ├── Layout.tsx
+│   │   ├── BackToTop.tsx
+│   │   ├── BackToTop.scss
+│   │   ├── CustomCursor.tsx
+│   │   ├── CustomCursor.scss
+│   │   └── sections/
+│   │       ├── HeroSection.tsx
+│   │       └── HeroSection.scss
+│   ├── config/
+│   │   └── seo.ts             # SEO configuration
+│   ├── data/
+│   │   ├── navigation.ts
+│   │   ├── matches.ts
+│   │   ├── news.ts
+│   │   └── benefits.ts
+│   ├── hooks/
+│   │   ├── useScroll.ts
+│   │   ├── useNavbar.ts
+│   │   ├── useCursor.ts
+│   │   ├── useReveal.ts
+│   │   ├── useTournamentTabs.ts
+│   │   └── useButtonRipple.ts
+│   ├── styles/
+│   │   ├── globals.scss
+│   │   ├── _variables.scss
+│   │   └── _mixins.scss
+│   └── types/
+│       ├── index.ts
+│       └── ion-icon.d.ts
+├── next.config.js
+├── tsconfig.json
+├── package.json
+├── .env.local
+└── README.md
 ```
 
-### Typography
+## 🎨 Key Features
 
-Modify fonts in `src/app/layout.tsx` and `src/styles/_variables.scss`:
+### Server-Side Rendering (SSR)
 
-```scss
-$ff-manrope: 'Manrope', sans-serif;
-```
+All pages are server-rendered by default for optimal SEO and performance.
 
-### Content
+### TypeScript
 
-Update website content by editing the respective page files in `src/app/`:
-- Home: `src/app/page.tsx`
-- About: `src/app/about/page.tsx`
-- Services: `src/app/services/page.tsx`
-- etc.
+Full type safety throughout the application with custom types for all data structures.
 
-## 📱 Responsive Design
+### SCSS Architecture
 
-The website is fully responsive with breakpoints:
-- Mobile: 575px and below
-- Tablet: 576px - 991px
-- Desktop: 992px - 1199px
-- Large Desktop: 1200px and above
-
-## 🔧 Component Architecture
-
-### Reusable Components
-
-- **Header**: Navigation with mobile menu
-- **Footer**: Site footer with newsletter signup
-- **Layout**: Page wrapper with common elements
-- **Sections**: Modular page sections
+- **Variables**: All colors, fonts, and sizes in `_variables.scss`
+- **Mixins**: Responsive breakpoints and reusable patterns in `_mixins.scss`
+- **Component Scoping**: Each component has its own SCSS file
 
 ### Custom Hooks
 
-- **useScroll**: Track scroll position for sticky header
-- **useSlider**: Image carousel functionality
-- **useAccordion**: Expandable content sections
+- `useScroll`: Tracks scroll position for header and back-to-top button
+- `useNavbar`: Manages mobile navigation state
+- `useCursor`: Custom cursor effects
+- `useReveal`: Scroll-based animations
+- `useTournamentTabs`: Tournament bracket tab switching
+- `useButtonRipple`: Button ripple hover effects
 
-## 🌐 SEO & Performance
+### SEO Optimization
 
-- **Metadata API**: Dynamic meta tags for each page
-- **Image Optimization**: Next.js Image component with lazy loading
-- **Font Optimization**: Google Fonts with display swap
-- **Core Web Vitals**: Optimized for performance metrics
+- Dynamic metadata for each page
+- Automatic sitemap generation
+- Robots.txt configuration
+- Open Graph and Twitter Card support
+- Semantic HTML structure
 
-## 🚀 Deployment
+### Security
 
-### Vercel (Recommended)
+- Comprehensive security headers (CSP, HSTS, X-Frame-Options, etc.)
+- No `X-Powered-By` header
+- Secure cookie settings
 
-1. **Connect your repository** to Vercel
-2. **Configure build settings** (auto-detected for Next.js)
-3. **Deploy** with automatic CI/CD
+## 🔨 Next Steps to Complete the Conversion
 
-### Other Platforms
+### 1. Create Additional Sections
 
-The project supports deployment on:
-- Netlify
-- AWS Amplify
-- Google Cloud Platform
-- Self-hosted servers
+You need to complete the remaining sections for the home page:
 
-Build command: `yarn build`
-Output directory: `.next`
+**Join Section** (`src/components/sections/JoinSection.tsx`):
+
+- Form with validation using React Hook Form + Zod
+- Benefits list
+- Form submission handling
+
+**Upcoming Matches Section** (`src/components/sections/UpcomingSection.tsx`):
+
+- Match cards with team logos
+- Date/time display
+- Social media links
+
+**News Section** (`src/components/sections/NewsSection.tsx`):
+
+- News cards grid
+- Dynamic content from data
+- Link to article pages
+
+### 2. Complete Tournament Page
+
+The tournament page needs:
+
+- Tournament tabs component (Valorant, Apex, League)
+- Bracket visualization
+- Match results display
+- Tab switching logic using `useTournamentTabs` hook
+
+### 3. Complete Article Page
+
+The article page needs:
+
+- Article content layout
+- Sidebar with latest posts
+- Reading time calculation
+- Social sharing buttons
+
+### 4. Add Form Validation
+
+Install and configure:
+
+```bash
+yarn add react-hook-form zod @hookform/resolvers
+```
+
+Then implement form validation in Join section.
+
+### 5. Add Remaining CSS
+
+Convert the remaining CSS from `assets/css/style.css` to component-specific SCSS files.
+
+### 6. Test Everything
+
+- Test all interactive features (navigation, forms, animations)
+- Verify responsive design on all breakpoints
+- Check SEO metadata on all pages
+- Test performance with Lighthouse
+
+## 📝 Available Scripts
+
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn start` - Start production server
+- `yarn lint` - Run ESLint
+- `yarn lint:fix` - Fix linting errors
+- `yarn type-check` - Run TypeScript compiler check
+- `yarn format` - Format code with Prettier
+- `yarn analyze` - Analyze bundle size
+
+## 🌐 Environment Variables
+
+Create `.env.local`:
+
+```env
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_NAME=Tournament
+```
+
+For production, update with your actual domain.
+
+## 🔐 SEO & Metadata
+
+Each page has custom metadata exported for optimal SEO:
+
+```typescript
+export const metadata: Metadata = {
+  title: "Page Title",
+  description: "Page description",
+  // ...other metadata
+};
+```
+
+## 📱 Responsive Breakpoints
+
+- Mobile: ≤ 574px
+- Mobile Up: ≥ 575px
+- Tablet Up: ≥ 768px
+- Laptop Up: ≥ 992px
+- Desktop Up: ≥ 1200px
+- XL Desktop Up: ≥ 1400px
+
+## 🎯 Best Practices Followed
+
+- ✅ Mobile-first responsive design
+- ✅ Component-based architecture
+- ✅ Type-safe TypeScript
+- ✅ SCSS with BEM-like naming
+- ✅ Server-side rendering for SEO
+- ✅ Proper semantic HTML
+- ✅ Accessibility attributes
+- ✅ Security headers
+- ✅ Image optimization
+- ✅ Code splitting
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [SCSS Documentation](https://sass-lang.com/documentation/)
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-**Adex Digital Studio**
-- Website: [https://adex-agency.com](https://adex-agency.com)
-- Email: info@email.com
-- Phone: 00 (123) 456 78 90
-
-## 🙏 Acknowledgments
-
-- Design inspiration from modern agency websites
-- Next.js team for the amazing framework
-- Ionicons for beautiful icons
-- Google Fonts for typography
+Follow the conventions in `agent.md` for consistent code style and architecture.
 
 ---
 
-Built with ❤️ by [Adex Digital Studio](https://github.com/trinhquocthinh)
+**Note:** All TypeScript errors shown during file creation are expected and will resolve once you run `yarn install` to install the dependencies.

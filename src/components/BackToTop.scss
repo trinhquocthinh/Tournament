@@ -1,0 +1,35 @@
+@use '@/styles/variables' as *;
+
+.back-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-image: $gradient-1;
+  color: $text-white;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: $radius-circle;
+  box-shadow: $shadow;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity $transition-1,
+    visibility $transition-1,
+    transform $transition-1;
+  z-index: 3;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:is(:hover, :focus-visible) {
+    transform: translateY(-5px);
+  }
+
+  ion-icon {
+    font-size: 2.4rem;
+  }
+}

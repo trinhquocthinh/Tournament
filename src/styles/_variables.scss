@@ -1,60 +1,85 @@
-// Colors
-$violet-blue-crayola: hsla(234, 50%, 64%, 1);
-$dark-cornflower-blue_a7: hsla(214, 88%, 27%, 0.07);
-$white: hsla(0, 0%, 100%, 1);
-$white_a3: hsla(0, 0%, 100%, 0.03);
-$white_a8: hsla(0, 0%, 100%, 0.08);
-$white_a12: hsla(0, 0%, 100%, 0.12);
-$white_a70: hsla(0, 0%, 100%, 0.7);
-$cultured: hsla(220, 20%, 97%, 1);
-$lavender-web: hsla(233, 52%, 94%, 1);
-$cadet-blue-crayola: hsla(220, 12%, 70%, 1);
-$cadet-blue-crayola_a20: hsla(222, 23%, 71%, 0.2);
-$charcoal: hsla(218, 22%, 26%, 1);
-$raisin-black: hsla(216, 14%, 14%, 1);
-$light-gray: hsla(0, 0%, 79%, 1);
-$blue-crayola: hsla(219, 72%, 56%, 1);
-$pink: hsla(332, 86%, 67%, 1);
-$oxford-blue: hsla(222, 45%, 18%, 1);
-$black-coral: hsla(220, 12%, 43%, 1);
+// Colors - Background
+$bg-purple: hsla(267, 100%, 63%, 1);
+$bg-purple-alpha-30: hsla(267, 100%, 63%, 0.3);
+$bg-dark-purple: hsla(279, 42%, 9%, 1);
+$bg-oxford-blue: hsla(240, 63%, 13%, 1);
+$bg-oxford-blue-alpha-95: hsla(240, 63%, 13%, 0.95);
+$bg-oxford-blue-alpha-90: hsla(240, 63%, 13%, 0.9);
+$bg-oxford-blue-alpha-80: hsla(240, 63%, 13%, 0.8);
+
+// Gradient colors
+$gradient-1: linear-gradient(
+  to right bottom,
+  hsl(299, 100%, 52%),
+  hsl(291, 100%, 58%),
+  hsl(283, 100%, 60%),
+  hsl(273, 100%, 62%),
+  hsl(262, 100%, 63%),
+  hsl(242, 100%, 69%),
+  hsl(223, 100%, 62%),
+  hsl(210, 100%, 50%),
+  hsl(203, 100%, 50%),
+  hsl(198, 100%, 50%),
+  hsl(192, 100%, 48%),
+  hsl(185, 90%, 48%)
+);
+$gradient-2: linear-gradient(
+  90deg,
+  transparent 0%,
+  #9841ff 50%,
+  transparent 100%
+);
+
+// Text colors
+$text-white: hsla(0, 0%, 100%, 1);
+$text-gainsboro: hsla(0, 0%, 87%, 1);
+$text-champagne-pink: hsla(23, 61%, 86%, 1);
+$text-purple: hsla(267, 100%, 63%, 1);
+
+// Border colors
+$border-space-cadet: hsl(240, 45%, 17%);
+$border-purple-alpha-30: hsla(267, 100%, 63%, 0.3);
 
 // Typography
-$ff-manrope: 'Manrope', sans-serif;
+$font-family-oxanium: 'Oxanium', cursive;
+$font-family-work-sans: 'Work Sans', sans-serif;
 
-// Font Sizes
-$fs-1: calc(2.7rem + 1.38vw);
-$fs-2: calc(2.6rem + 0.66vw);
-$fs-3: 2.2rem;
-$fs-4: 1.9rem;
-$fs-5: 1.8rem;
-$fs-6: 1.7rem;
-$fs-7: 1.5rem;
-$fs-8: 1.4rem;
+$font-size-1: 3.6rem;
+$font-size-2: 2.4rem;
+$font-size-3: 2rem;
+$font-size-4: 1.7rem;
+$font-size-5: 1.6rem;
+$font-size-6: 1.5rem;
+$font-size-7: 1.4rem;
+$font-size-8: 1.2rem;
 
-// Font Weights
-$fw-700: 700;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
 
 // Spacing
-$section-padding: 120px;
+$section-spacing: 60px;
 
-// Box Shadow
-$shadow-1: 0 0 20px hsla(216, 14%, 14%, 0.05);
-$shadow-2:
-  0 0 0 0.05rem hsla(214, 88%, 27%, 0.08),
-  0 0 1.25rem hsla(216, 14%, 14%, 0.06);
-$shadow-3: 0 0 1.25rem hsla(216, 14%, 14%, 0.04);
+// Shadow
+$shadow: 0px 2px 5px 0px hsla(0, 0%, 0%, 0.2);
 
 // Border Radius
 $radius-circle: 50%;
-$radius-pill: 100px;
-$radius-16: 16px;
-$radius-24: 24px;
-$radius-32: 32px;
-$radius-10: 10px;
-$radius-8: 8px;
-$radius-6: 6px;
+$radius-5: 5px;
+$radius-3: 3px;
+
+// Clip paths
+$clip-path-1: polygon(0 0, 100% 0, 100% 0, 0 0);
+$clip-path-2: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+$clip-path-3: polygon(0% 0%, 90% 0, 100% 30%, 100% 100%, 0 100%);
+$clip-path-4: polygon(90% 0, 100% 40%, 100% 100%, 0 100%, 0 0);
+$clip-path-5: polygon(100% 0, 100% 100%, 10% 100%, 0 60%, 0 0);
+$clip-path-6: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 40%);
+$clip-path-7: polygon(100% 0, 100% 60%, 90% 100%, 0 100%, 0 0);
+$clip-path-8: polygon(0% 0%, 70% 0, 100% 30%, 100% 100%, 0 100%);
+$clip-path-9: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
 
 // Transitions
-$transition-1: 0.25s ease;
-$transition-2: 0.5s ease;
-$transition-3: 0.3s ease-in-out;
+$transition-1: 250ms ease;
+$transition-2: 500ms ease;
+$cubic-out: cubic-bezier(0.05, 0.83, 0.52, 0.97);

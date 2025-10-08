@@ -3,65 +3,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
 
-import type { NavLink, SocialLink } from '@/types';
+import { navLinks } from '@/data/navigation';
+import { useButtonRipple } from '@/hooks/useButtonRipple';
+import { useNavbar } from '@/hooks/useNavbar';
+import { useScroll } from '@/hooks/useScroll';
 
 import './Header.scss';
 
-const Header = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Header() {
+  const { isScrolled } = useScroll();
+  const { isOpen, toggle, close } = useNavbar();
   const pathname = usePathname();
+  const { handleMouseMove } = useButtonRipple();
 
-  const navLinks: NavLink[] = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
-  ];
-
-  const socialLinks: SocialLink[] = [
-    { href: 'https://twitter.com', icon: 'logo-twitter', label: 'Twitter' },
-    { href: 'https://facebook.com', icon: 'logo-facebook', label: 'Facebook' },
-    { href: 'https://dribbble.com', icon: 'logo-dribbble', label: 'Dribbble' },
-    {
-      href: 'https://instagram.com',
-      icon: 'logo-instagram',
-      label: 'Instagram',
-    },
-    { href: 'https://youtube.com', icon: 'logo-youtube', label: 'YouTube' },
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isNavOpen) {
-      document.body.classList.add('nav-active');
-    } else {
-      document.body.classList.remove('nav-active');
+  const isActiveLink = (href: string) => {
+    if (href.startsWith('/#')) {
+      return pathname === '/' && href.includes(pathname);
     }
-
-    return () => {
-      document.body.classList.remove('nav-active');
-    };
-  }, [isNavOpen]);
-
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
-  };
-
-  const closeNav = () => {
-    setIsNavOpen(false);
+    return pathname === href || pathname.startsWith(href + '/');
   };
 
   return (
@@ -69,109 +29,51 @@ const Header = () => {
       <div className="container">
         <Link href="/" className="logo">
           <Image
-            src="/assets/images/logo-light.svg"
-            width={74}
-            height={24}
-            alt="Adex home"
-            className="logo-light"
-          />
-          <Image
-            src="/assets/images/logo-dark.svg"
-            width={74}
-            height={24}
-            alt="Adex home"
-            className="logo-dark"
+            src="/assets/images/logo.svg"
+            width={110}
+            height={53}
+            alt="Tournament home"
+            priority
           />
         </Link>
 
-        <nav className={`navbar ${isNavOpen ? 'active' : ''}`} data-navbar>
-          <div className="navbar-top">
-            <Link href="/" className="logo">
-              <Image
-                src="/assets/images/logo-light.svg"
-                width={74}
-                height={24}
-                alt="Adex home"
-              />
-            </Link>
-
-            <button
-              className="nav-close-btn"
-              aria-label="close menu"
-              onClick={toggleNav}
-            >
-              <ion-icon name="close-outline" aria-hidden={true}></ion-icon>
-            </button>
-          </div>
-
+        <nav className={`navbar ${isOpen ? 'active' : ''}`} data-navbar>
           <ul className="navbar-list">
-            {navLinks.map((link, index) => (
-              <li key={index}>
+            {navLinks.map(link => (
+              <li key={link.label} className="navbar-item">
                 <Link
                   href={link.href}
-                  className={`navbar-link ${pathname === link.href ? 'active' : ''}`}
-                  onClick={closeNav}
+                  className={`navbar-link ${isActiveLink(link.href) ? 'active' : ''}`}
+                  data-nav-link
+                  onClick={close}
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
-
-          <div className="wrapper">
-            <Link href="mailto:info@email.com" className="contact-link">
-              info@email.com
-            </Link>
-            <Link href="tel:001234567890" className="contact-link">
-              00 (123) 456 78 90
-            </Link>
-          </div>
-
-          <ul className="social-list">
-            {socialLinks.map((social, index) => (
-              <li key={index}>
-                <Link
-                  href={social.href}
-                  className="social-link"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <ion-icon name={social.icon}></ion-icon>
-                </Link>
-              </li>
-            ))}
-          </ul>
         </nav>
 
-        <Link href="/contact#quote" className="btn btn-primary">
-          Free Trial
+        <Link
+          href="/#join"
+          className="btn"
+          data-btn
+          onMouseMove={handleMouseMove}
+        >
+          join our team
         </Link>
 
         <button
-          className="nav-open-btn"
-          aria-label="open menu"
-          onClick={toggleNav}
+          className={`nav-toggle-btn ${isOpen ? 'active' : ''}`}
+          aria-label="toggle menu"
+          data-nav-toggler
+          onClick={toggle}
         >
-          <ion-icon name="menu-outline" aria-hidden={true}></ion-icon>
+          <span className="line line-1"></span>
+          <span className="line line-2"></span>
+          <span className="line line-3"></span>
         </button>
-
-        <div
-          className={`overlay ${isNavOpen ? 'active' : ''}`}
-          onClick={closeNav}
-          onKeyDown={e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              closeNav();
-            }
-          }}
-          role="button"
-          tabIndex={0}
-          aria-label="Close navigation menu"
-          data-overlay
-        ></div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

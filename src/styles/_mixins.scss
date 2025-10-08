@@ -5,7 +5,7 @@ $laptop: 991px;
 $desktop: 1199px;
 $xl-desktop: 1399px;
 
-// Mixins for responsive design
+// Responsive mixins
 @mixin mobile-up {
   @media (min-width: #{$mobile + 1px}) {
     @content;
@@ -33,24 +33,6 @@ $xl-desktop: 1399px;
 @mixin xl-desktop-up {
   @media (min-width: #{$xl-desktop + 1px}) {
     @content;
-  }
-}
-
-// Button mixin
-@mixin btn-style($bg-color: $violet-blue-crayola, $text-color: $white) {
-  background-color: $bg-color;
-  color: $text-color;
-  font-weight: $fw-700;
-  padding: 14px 70px;
-  transition: $transition-1;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  border-radius: $radius-pill;
-
-  &:hover {
-    background-color: lighten($bg-color, 10%);
-    transform: translateY(-3px);
-    box-shadow: $shadow-1;
   }
 }
 
@@ -90,7 +72,7 @@ $xl-desktop: 1399px;
 }
 
 @mixin section-padding {
-  padding-block: $section-padding;
+  padding-block: $section-spacing;
 }
 
 @mixin container {

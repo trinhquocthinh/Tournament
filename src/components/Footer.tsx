@@ -1,200 +1,159 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
-import type { SocialLink, NewsletterFormData } from '@/types';
+import { useButtonRipple } from '@/hooks/useButtonRipple';
 import './Footer.scss';
 
-// Validation schema
-const newsletterSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required('Email is required')
-    .email('Please enter a valid email address')
-    .trim(),
-});
-
-const Footer = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<NewsletterFormData>({
-    resolver: yupResolver(newsletterSchema),
-    defaultValues: {
-      email: '',
-    },
-  });
-
-  const socialLinks: SocialLink[] = [
-    { href: 'https://facebook.com', icon: 'logo-facebook', label: 'Facebook' },
-    { href: 'https://twitter.com', icon: 'logo-twitter', label: 'Twitter' },
-    { href: 'https://dribbble.com', icon: 'logo-dribbble', label: 'Dribbble' },
-    {
-      href: 'https://instagram.com',
-      icon: 'logo-instagram',
-      label: 'Instagram',
-    },
-    { href: 'https://youtube.com', icon: 'logo-youtube', label: 'YouTube' },
-  ];
-
-  const onSubmit = async (data: NewsletterFormData) => {
-    try {
-      // Handle newsletter subscription logic here
-      // Example: await subscribeToNewsletter(data.email);
-
-      // Simulate API call with the email data
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Reset form on successful submission
-      reset();
-
-      // You can add success notification here
-      alert(`Successfully subscribed ${data.email} to newsletter!`);
-    } catch (error) {
-      // You can add error notification here
-      console.error('Newsletter subscription failed:', error);
-      alert('Failed to subscribe. Please try again.');
-    }
-  };
+export default function Footer() {
+  const { handleMouseMove } = useButtonRipple();
 
   return (
     <footer className="footer">
-      <div className="container grid-list">
-        <div className="footer-brand">
-          <Link href="/" className="logo">
-            <Image
-              src="/assets/images/logo-light.svg"
-              width={74}
-              height={24}
-              alt="Adex home"
-            />
-          </Link>
+      <div className="section footer-top">
+        <div className="container">
+          <div className="footer-brand">
+            <Link href="/" className="logo">
+              <Image
+                src="/assets/images/logo.svg"
+                width={150}
+                height={73}
+                alt="Tournament logo"
+              />
+            </Link>
 
-          <p className="footer-text">
-            &copy; 2022 codewithsadee. <br /> All rights reserved.
-          </p>
+            <p className="footer-text">
+              Our success in creating business solutions is due in large part to
+              our talented and highly committed team.
+            </p>
 
-          <ul className="social-list">
-            {socialLinks.map((social, index) => (
-              <li key={index}>
-                <Link
-                  href={social.href}
-                  className="social-link"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <ion-icon name={social.icon}></ion-icon>
+            <ul className="social-list">
+              <li>
+                <Link href="https://facebook.com" className="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
 
-        <ul className="footer-list">
-          <li>
-            <p className="h4 footer-list-title">Get in Touch</p>
-          </li>
+              <li>
+                <Link href="https://twitter.com" className="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </Link>
+              </li>
 
-          <li>
-            <address className="footer-text">
-              Moonshine St. 14/05 Light City, London, United Kingdom
-            </address>
-          </li>
+              <li>
+                <Link href="https://instagram.com" className="social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </Link>
+              </li>
 
-          <li>
-            <Link href="mailto:info@email.com" className="footer-link">
-              info@email.com
-            </Link>
-          </li>
+              <li>
+                <Link href="https://youtube.com" className="social-link">
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-          <li>
-            <Link href="tel:001234567890" className="footer-link">
-              00 (123) 456 78 90
-            </Link>
-          </li>
-        </ul>
+          <div className="footer-list">
+            <p className="title footer-list-title has-after">Useful Links</p>
 
-        <ul className="footer-list">
-          <li>
-            <p className="h4 footer-list-title">Learn More</p>
-          </li>
+            <ul>
+              <li>
+                <Link href="/tournament" className="footer-link">
+                  Tournament Hub
+                </Link>
+              </li>
 
-          <li>
-            <Link href="/about" className="footer-link">
-              About Us
-            </Link>
-          </li>
+              <li>
+                <Link href="/article" className="footer-link">
+                  Blog &amp; News
+                </Link>
+              </li>
 
-          <li>
-            <Link href="/about#story" className="footer-link">
-              Our Story
-            </Link>
-          </li>
+              <li>
+                <Link href="/privacy-policy" className="footer-link">
+                  Privacy and Policy
+                </Link>
+              </li>
 
-          <li>
-            <Link href="/services" className="footer-link">
-              Services
-            </Link>
-          </li>
+              <li>
+                <Link href="/terms-of-use" className="footer-link">
+                  Terms of Use
+                </Link>
+              </li>
 
-          <li>
-            <Link href="/projects" className="footer-link">
-              Projects
-            </Link>
-          </li>
+              <li>
+                <Link href="/#join" className="footer-link">
+                  Join The Squad
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-          <li>
-            <Link href="/terms" className="footer-link">
-              Terms of Use
-            </Link>
-          </li>
+          <div className="footer-list">
+            <p className="title footer-list-title has-after">Contact Us</p>
 
-          <li>
-            <Link href="/privacy" className="footer-link">
-              Privacy Policy
-            </Link>
-          </li>
-        </ul>
+            <div className="contact-item">
+              <span className="span">Location:</span>
 
-        <div className="footer-list">
-          <p className="h4 footer-list-title">Our Newsletter</p>
-
-          <p className="footer-text">
-            Subscribe to our newsletter to get our news & deals delivered to
-            you.
-          </p>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="input-wrapper">
-            <div className="input-group">
-              <input
-                type="email"
-                placeholder="Email Address"
-                className={`input-field ${errors.email ? 'error' : ''}`}
-                {...register('email')}
-              />
-              {errors.email && (
-                <span className="error-message">{errors.email.message}</span>
-              )}
+              <address className="contact-link">
+                153 Williamson Plaza, Maggieberg, MT 09514
+              </address>
             </div>
 
-            <button
-              type="submit"
-              className="submit-btn"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Joining...' : 'Join'}
-            </button>
-          </form>
+            <div className="contact-item">
+              <span className="span">Join Us:</span>
+
+              <a href="mailto:Info@Tournament.com" className="contact-link">
+                Info@Tournament.com
+              </a>
+            </div>
+
+            <div className="contact-item">
+              <span className="span">Phone:</span>
+
+              <a href="tel:+12345678910" className="contact-link">
+                +1 (234) 567-8910
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-list">
+            <p className="title footer-list-title has-after">
+              Newsletter Signup
+            </p>
+
+            <form action="/" method="get" className="footer-form">
+              <input
+                type="email"
+                name="email_address"
+                required
+                placeholder="Your Email"
+                autoComplete="off"
+                className="input-field"
+              />
+
+              <button
+                type="submit"
+                className="btn"
+                data-btn
+                onMouseMove={handleMouseMove}
+              >
+                Subscribe Now
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <div className="container">
+          <p className="copyright">
+            &copy; 2025 Tournament Esports. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

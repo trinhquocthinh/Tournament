@@ -10,10 +10,10 @@ const nextConfig = {
   // Performance optimizations
   poweredByHeader: false, // Remove X-Powered-By header for security
   compress: true, // Enable gzip compression
-
+  
   // Production optimizations
   swcMinify: true, // Use SWC for minification (faster than Terser)
-
+  
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'], // Modern image formats
@@ -64,8 +64,7 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value:
-              'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
           },
           {
             key: 'Content-Security-Policy',
@@ -103,8 +102,7 @@ const nextConfig = {
 
   // Environment variables that should be available on the client
   env: {
-    NEXT_PUBLIC_SITE_URL:
-      process.env.NEXT_PUBLIC_SITE_URL || 'https://adex-agency.com',
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://Tournament-agency.com',
   },
 
   // Production source maps (disable for security, enable for debugging)
@@ -128,3 +126,4 @@ const nextConfig = {
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
+

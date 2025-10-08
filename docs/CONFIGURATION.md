@@ -140,8 +140,8 @@ yarn release:major      # Major version release
 
 ### Key Variables
 ```bash
-NEXT_PUBLIC_SITE_URL=https://adex-agency.com
-NEXT_PUBLIC_SITE_NAME="Adex Digital Studio"
+NEXT_PUBLIC_SITE_URL=https://Tournament-agency.com
+NEXT_PUBLIC_SITE_NAME="Tournament Digital Studio"
 
 # Optional: Add analytics
 # NEXT_PUBLIC_GA_TRACKING_ID=G-XXXXXXXXXX
