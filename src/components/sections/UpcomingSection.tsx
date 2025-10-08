@@ -3,9 +3,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { upcomingGames } from '@/data/matches';
+import { useTournamentTabs } from '@/hooks/useTournamentTabs';
 import './UpcomingSection.scss';
 
 export default function UpcomingSection() {
+  const fallbackId = upcomingGames[0]?.id ?? 'default';
+  const { activeTab, switchTab } = useTournamentTabs(fallbackId);
+  const activeGame =
+    upcomingGames.find(game => game.id === activeTab) ?? upcomingGames[0];
+
+  if (!activeGame) {
+    return null;
+  }
+
   return (
     <section
       className="section upcoming"
@@ -31,163 +42,143 @@ export default function UpcomingSection() {
           talented and highly committed team.
         </p>
 
-        <ol className="upcoming-list">
-          <li className="upcoming-item">
-            <div className="upcoming-card left has-before" data-reveal="left">
-              <Image
-                src="/assets/images/team-logo-1.png"
-                width={86}
-                height={81}
-                loading="lazy"
-                alt="Purple Death Cadets"
-                className="card-banner"
-              />
+        <div
+          className="upcoming-tabs"
+          role="tablist"
+          aria-label="Upcoming games"
+          data-reveal="bottom"
+        >
+          {upcomingGames.map(game => {
+            const isActive = game.id === activeGame.id;
 
-              <h3 className="h3 card-title">Purple Death Cadets</h3>
+            return (
+              <button
+                key={game.id}
+                id={`upcoming-tab-${game.id}`}
+                type="button"
+                className={`upcoming-tab${isActive ? ' is-active' : ''}`}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`upcoming-panel-${game.id}`}
+                onClick={() => switchTab(game.id)}
+              >
+                <span className="upcoming-tab__label">{game.label}</span>
+                {game.description && (
+                  <span className="upcoming-tab__sub">{game.description}</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
 
-              <div className="card-meta">Group 04 | Match 06th</div>
-            </div>
+        <ol
+          className="upcoming-list"
+          id={`upcoming-panel-${activeGame.id}`}
+          role="tabpanel"
+          aria-labelledby={`upcoming-tab-${activeGame.id}`}
+          data-reveal="bottom"
+        >
+          {activeGame.matches.map((match, index) => {
+            const youtubeHref = match.socials.youtube ?? '#';
+            const twitchHref = match.socials.twitch ?? '#';
+            const displayDate =
+              match.dateLabel ??
+              (() => {
+                const date = new Date(match.date);
 
-            <div className="upcoming-time" data-reveal="bottom">
-              <time className="time" dateTime="10:00">
-                10:00
-              </time>
+                if (Number.isNaN(date.getTime())) {
+                  return match.date;
+                }
 
-              <time className="date" dateTime="2024-05-25">
-                25TH May 2024
-              </time>
+                return new Intl.DateTimeFormat('en-US', {
+                  day: '2-digit',
+                  month: 'short',
+                  year: 'numeric',
+                }).format(date);
+              })();
 
-              <div className="social-wrapper">
-                <Link href="https://youtube.com" className="social-link">
-                  <ion-icon name="logo-youtube"></ion-icon>
-                </Link>
+            return (
+              <li
+                key={match.id}
+                className="upcoming-item"
+                data-active={index === 0 ? 'primary' : undefined}
+              >
+                <div className="upcoming-card left has-before">
+                  <Image
+                    src={match.leftTeam.logo}
+                    width={86}
+                    height={81}
+                    loading="lazy"
+                    alt={match.leftTeam.name}
+                    className="card-banner"
+                  />
 
-                <Link href="https://twitch.tv" className="social-link">
-                  <ion-icon name="logo-twitch"></ion-icon>
-                </Link>
-              </div>
-            </div>
+                  <h3 className="h3 card-title">{match.leftTeam.name}</h3>
 
-            <div className="upcoming-card right has-before" data-reveal="right">
-              <Image
-                src="/assets/images/team-logo-2.png"
-                width={86}
-                height={81}
-                loading="lazy"
-                alt="Trigger Brain Squad"
-                className="card-banner"
-              />
+                  <div className="card-meta">
+                    {match.leftTeam.group} | {match.leftTeam.match}
+                  </div>
+                </div>
 
-              <h3 className="h3 card-title">Trigger Brain Squad</h3>
+                <div className="upcoming-time">
+                  <time className="time" dateTime={match.time}>
+                    {match.time}
+                  </time>
 
-              <div className="card-meta">Group 04 | Match 06th</div>
-            </div>
-          </li>
+                  <time className="date" dateTime={match.date}>
+                    {displayDate}
+                  </time>
 
-          <li className="upcoming-item">
-            <div className="upcoming-card left has-before" data-reveal="left">
-              <Image
-                src="/assets/images/team-logo-3.png"
-                width={86}
-                height={81}
-                loading="lazy"
-                alt="The Black Hat Hackers"
-                className="card-banner"
-              />
+                  <div className="social-wrapper">
+                    <Link
+                      href={youtubeHref}
+                      className="social-link"
+                      aria-label="Watch on YouTube"
+                    >
+                      <ion-icon name="logo-youtube"></ion-icon>
+                    </Link>
 
-              <h3 className="h3 card-title">The Black Hat Hackers</h3>
+                    <Link
+                      href={twitchHref}
+                      className="social-link"
+                      aria-label="Watch on Twitch"
+                    >
+                      <ion-icon name="logo-twitch"></ion-icon>
+                    </Link>
+                  </div>
+                </div>
 
-              <div className="card-meta">Group 05 | Match 02nd</div>
-            </div>
+                <div className="upcoming-card right has-before">
+                  <Image
+                    src={match.rightTeam.logo}
+                    width={86}
+                    height={81}
+                    loading="lazy"
+                    alt={match.rightTeam.name}
+                    className="card-banner"
+                  />
 
-            <div className="upcoming-time" data-reveal="bottom">
-              <time className="time" dateTime="12:30">
-                12:30
-              </time>
+                  <h3 className="h3 card-title">{match.rightTeam.name}</h3>
 
-              <time className="date" dateTime="2024-01-10">
-                10TH Jan 2024
-              </time>
-
-              <div className="social-wrapper">
-                <Link href="https://youtube.com" className="social-link">
-                  <ion-icon name="logo-youtube"></ion-icon>
-                </Link>
-
-                <Link href="https://twitch.tv" className="social-link">
-                  <ion-icon name="logo-twitch"></ion-icon>
-                </Link>
-              </div>
-            </div>
-
-            <div className="upcoming-card right has-before" data-reveal="right">
-              <Image
-                src="/assets/images/team-logo-4.png"
-                width={86}
-                height={81}
-                loading="lazy"
-                alt="Your Worst Nightmare"
-                className="card-banner"
-              />
-
-              <h3 className="h3 card-title">Your Worst Nightmare</h3>
-
-              <div className="card-meta">Group 05 | Match 02nd</div>
-            </div>
-          </li>
-
-          <li className="upcoming-item">
-            <div className="upcoming-card left has-before" data-reveal="left">
-              <Image
-                src="/assets/images/team-logo-5.png"
-                width={86}
-                height={81}
-                loading="lazy"
-                alt="Witches And Quizards"
-                className="card-banner"
-              />
-
-              <h3 className="h3 card-title">Witches And Quizards</h3>
-
-              <div className="card-meta">Group 02 | Match 03rd</div>
-            </div>
-
-            <div className="upcoming-time" data-reveal="bottom">
-              <time className="time" dateTime="04:20">
-                04:20
-              </time>
-
-              <time className="date" dateTime="2024-12-15">
-                15th Dec 2024
-              </time>
-
-              <div className="social-wrapper">
-                <Link href="https://youtube.com" className="social-link">
-                  <ion-icon name="logo-youtube"></ion-icon>
-                </Link>
-
-                <Link href="https://twitch.tv" className="social-link">
-                  <ion-icon name="logo-twitch"></ion-icon>
-                </Link>
-              </div>
-            </div>
-
-            <div className="upcoming-card right has-before" data-reveal="right">
-              <Image
-                src="/assets/images/team-logo-6.png"
-                width={86}
-                height={81}
-                loading="lazy"
-                alt="Resting Bitch Faces"
-                className="card-banner"
-              />
-
-              <h3 className="h3 card-title">Resting Bitch Faces</h3>
-
-              <div className="card-meta">Group 02 | Match 03rd</div>
-            </div>
-          </li>
+                  <div className="card-meta">
+                    {match.rightTeam.group} | {match.rightTeam.match}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ol>
+
+        <div className="upcoming-footer" data-reveal="bottom">
+          <Link
+            href="/tournament"
+            className="btn btn-primary see-results"
+            data-btn
+          >
+            See full results
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -100,10 +100,18 @@ export interface UpcomingMatch {
   };
   time: string;
   date: string;
+  dateLabel?: string;
   socials: {
     youtube?: string;
     twitch?: string;
   };
+}
+
+export interface UpcomingGame {
+  id: string;
+  label: string;
+  description?: string;
+  matches: UpcomingMatch[];
 }
 
 // Join Benefits

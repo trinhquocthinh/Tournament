@@ -1,67 +1,210 @@
 @use '@/styles/variables' as *;
 @use '@/styles/mixins' as *;
 
-.hero {
-  padding-block-start: 170px;
+.upcoming {
   text-align: center;
 
-  &::before {
-    background-image: $gradient-2;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    z-index: 1;
-  }
-
-  @include desktop-up {
-    padding-block-start: 250px;
-  }
-
-  .section-subtitle {
-    letter-spacing: 5px;
+  .section-title {
+    margin-block: 20px 10px;
 
     @include tablet-up {
-      letter-spacing: 10px;
+      margin-block-end: 20px;
     }
   }
 
-  &-title {
-    margin-block: 20px 25px;
+  .section-text {
+    max-width: 620px;
+    margin: 0 auto;
+    color: $text-gainsboro;
   }
 
-  .btn {
-    margin-inline: auto;
+  .upcoming-tabs {
+    display: grid;
+    gap: 16px;
+    margin-block: 48px 40px;
+
+    @include tablet-up {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
   }
 
-  &-banner {
+  .upcoming-tab {
+    @include button-reset;
     position: relative;
-    margin-block-start: 50px;
+    text-align: left;
+    padding: 20px 22px;
+    border-radius: $radius-5;
+    background: $bg-oxford-blue-alpha-90;
+    border: 1px solid $border-space-cadet;
+    transition: $transition-2;
+    color: $text-white;
+    box-shadow: inset 0 0 0 0 transparent;
 
-    @include desktop-up {
-      .w-100 {
-        max-width: max-content;
-        margin-inline: auto;
+    &:focus-visible {
+      outline: 2px solid $text-purple;
+      outline-offset: 3px;
+    }
+
+    &:hover:not(.is-active) {
+      border-color: $border-purple-alpha-30;
+      box-shadow: inset 0 0 0 1px $border-purple-alpha-30;
+    }
+
+    &.is-active {
+      background: $gradient-1;
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(27, 9, 62, 0.5);
+
+      .upcoming-tab__sub {
+        color: $text-white;
       }
     }
 
-    &-bg {
-      display: none;
+    &__label {
+      display: block;
+      font-size: $font-size-4;
+      font-family: $font-family-oxanium;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 
-      @include tablet-up {
-        display: block;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        transform: scale(1.3);
-        transform-origin: bottom;
-        z-index: -1;
-      }
+    &__sub {
+      display: block;
+      margin-top: 8px;
+      font-size: $font-size-8;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: $text-gainsboro;
+    }
+  }
 
-      @include desktop-up {
-        transform: scale(1.2);
+  .upcoming-list {
+    display: grid;
+    gap: 24px;
+    margin-block-end: 48px;
+
+    @include tablet-up {
+      gap: 32px;
+    }
+  }
+
+  .upcoming-item {
+    display: grid;
+    gap: 18px;
+    padding: 28px 22px;
+    border-radius: $radius-5;
+    background: $bg-oxford-blue-alpha-95;
+    border: 1px solid $border-space-cadet;
+    box-shadow: 0 12px 25px rgba(6, 4, 29, 0.35);
+    align-items: center;
+
+    &[data-active='primary'] {
+      border-color: $text-purple;
+      box-shadow: 0 16px 35px rgba(118, 37, 204, 0.3);
+    }
+
+    @include tablet-up {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 32px 40px;
+    }
+
+    @include laptop-up {
+      gap: 24px;
+    }
+  }
+
+  .upcoming-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+
+    .card-banner {
+      width: 86px;
+      height: 81px;
+      object-fit: contain;
+    }
+
+    .card-title {
+      font-size: $font-size-4;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .card-meta {
+      color: $text-gainsboro;
+      font-size: $font-size-8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  }
+
+  .upcoming-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding-block: 12px;
+    border-block: 1px dashed $border-purple-alpha-30;
+
+    @include tablet-up {
+      padding-block: 0;
+      border-block: none;
+      border-inline: 1px dashed $border-purple-alpha-30;
+      min-height: 100%;
+    }
+
+    .time {
+      font-size: $font-size-2;
+      font-family: $font-family-oxanium;
+      font-weight: $font-weight-bold;
+      letter-spacing: 4px;
+      color: $text-white;
+    }
+
+    .date {
+      font-size: $font-size-7;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: $text-champagne-pink;
+    }
+
+    .social-wrapper {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-link {
+      @include flex-center;
+      width: 42px;
+      height: 42px;
+      border-radius: $radius-circle;
+      background: $bg-oxford-blue;
+      color: $text-white;
+      transition: $transition-1;
+
+      &:hover {
+        background: $text-purple;
       }
+    }
+  }
+
+  .upcoming-footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .see-results {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+    ion-icon {
+      font-size: 1.4em;
     }
   }
 }
