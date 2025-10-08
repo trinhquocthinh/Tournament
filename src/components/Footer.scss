@@ -3,36 +3,26 @@
 
 .footer {
   .footer-top {
-    padding-block: 60px;
-
-    @include laptop-up {
-      padding-block: 100px;
-    }
-
     .container {
       display: grid;
-      gap: 40px;
+      gap: 35px;
 
-      @include tablet-up {
-        grid-template-columns: repeat(2, 1fr);
+      @include mobile-up {
+        grid-template-columns: 1fr 1fr;
       }
 
       @include laptop-up {
         grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
+      }
+
+      @include desktop-up {
+        grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
       }
     }
   }
 
-  .footer-brand {
-    .logo img {
-      width: 150px;
-    }
-
-    .footer-text {
-      margin-block: 25px 20px;
-      line-height: 1.8;
-    }
+  .footer-text {
+    margin-block: 25px 20px;
   }
 
   .social-list {
@@ -41,44 +31,41 @@
   }
 
   .social-link {
-    background-color: $bg-oxford-blue-alpha-80;
-    color: $text-white;
-    width: 45px;
-    height: 45px;
-    @include flex-center;
-    border-radius: $radius-5;
+    width: 40px;
+    height: 40px;
+    background-color: $bg-purple-alpha-30;
+    display: grid;
+    place-items: center;
+    clip-path: $clip-path-8;
     transition: $transition-1;
 
     &:is(:hover, :focus-visible) {
       background-color: $bg-purple;
-      color: $text-white;
-    }
-
-    ion-icon {
-      font-size: 2rem;
+      transform: translateY(-2px);
     }
   }
 
   .footer-list-title {
     font-size: $font-size-3;
     font-weight: $font-weight-semi-bold;
-    color: $text-white;
-    margin-block-end: 25px;
+    line-height: 1;
     position: relative;
+    padding-block-end: 10px;
+    margin-block-end: 20px;
+    max-width: max-content;
 
-    &.has-after::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
+    &::after {
+      bottom: 0;
       left: 0;
-      width: 50px;
-      height: 3px;
-      background-image: $gradient-1;
+      width: 50%;
+      height: 4px;
+      background-color: $bg-purple;
     }
   }
 
   .footer-link {
-    padding-block: 8px;
+    padding-block: 5px;
+    color: $text-white;
     transition: $transition-1;
 
     &:is(:hover, :focus-visible) {
@@ -88,59 +75,54 @@
   }
 
   .contact-item {
-    margin-block-start: 15px;
-    display: flex;
-    gap: 10px;
-
-    .span {
-      color: $text-white;
-      font-weight: $font-weight-semi-bold;
-      min-width: 70px;
+    &:not(:last-child) {
+      margin-block-end: 15px;
     }
 
-    .contact-link {
-      transition: $transition-1;
-
-      &:is(:hover, :focus-visible) {
-        color: $text-purple;
-      }
+    .span {
+      color: $text-purple;
+      font-size: $font-size-7;
+      text-transform: uppercase;
+      font-weight: $font-weight-semi-bold;
     }
   }
 
-  .footer-form {
-    margin-block-start: 25px;
+  .input-field {
+    background-color: $bg-oxford-blue-alpha-80;
+    color: $text-gainsboro;
+    font-size: $font-size-5;
+    padding: 15px 20px;
+    box-shadow: $shadow;
+    border: 2px solid $border-purple-alpha-30;
+    margin-block-end: 15px;
+    outline: none;
 
-    .input-field {
-      background-color: $bg-oxford-blue-alpha-80;
-      border: 1px solid $border-purple-alpha-30;
+    &:focus {
+      border-color: $bg-purple;
+    }
+
+    &::placeholder {
       color: $text-gainsboro;
-      padding: 15px 20px;
-      border-radius: $radius-5;
-      margin-block-end: 15px;
-      outline: none;
-      transition: $transition-1;
-
-      &:focus {
-        border-color: $bg-purple;
-      }
-
-      &::placeholder {
-        color: $text-gainsboro;
-      }
     }
+  }
 
-    .btn {
-      width: 100%;
-    }
+  .btn {
+    width: 100%;
   }
 
   .footer-bottom {
-    background-color: $bg-oxford-blue;
-    padding-block: 25px;
+    clip-path: $clip-path-9;
+    background-color: $bg-oxford-blue-alpha-80;
     text-align: center;
 
     .copyright {
-      font-size: $font-size-7;
+      padding: 30px 20px;
+    }
+  }
+
+  @include desktop-up {
+    .logo img {
+      width: 205px;
     }
   }
 }

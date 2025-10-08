@@ -2,27 +2,22 @@
 
 .back-top-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-image: $gradient-1;
-  color: $text-white;
+  bottom: 10px;
+  right: 20px;
   width: 50px;
   height: 50px;
+  background-image: $gradient-1;
   display: grid;
   place-items: center;
-  border-radius: $radius-circle;
-  box-shadow: $shadow;
+  font-size: 2.1rem;
+  clip-path: $clip-path-8;
   opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity $transition-1,
-    visibility $transition-1,
-    transform $transition-1;
-  z-index: 3;
+  transition: $transition-1;
+  z-index: 4;
 
   &.active {
     opacity: 1;
-    visibility: visible;
+    transform: translateY(-20px);
   }
 
   &:is(:hover, :focus-visible) {

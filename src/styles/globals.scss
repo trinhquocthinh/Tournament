@@ -186,10 +186,6 @@ body {
   width: 100%;
 }
 
-.section {
-  padding-block: $section-spacing;
-}
-
 .section-title {
   margin-block: 10px;
   text-transform: uppercase;
@@ -216,10 +212,6 @@ body {
   transition: $transition-1;
 }
 
-.social-link:is(:hover, :focus-visible) {
-  color: $text-purple;
-}
-
 .img-holder {
   background-color: $bg-purple;
   aspect-ratio: var(--width) / var(--height);
@@ -230,6 +222,10 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.section {
+  padding-block: $section-spacing;
 }
 
 [data-reveal] {
