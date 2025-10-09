@@ -76,7 +76,6 @@ export default function UpcomingSection() {
           id={`upcoming-panel-${activeGame.id}`}
           role="tabpanel"
           aria-labelledby={`upcoming-tab-${activeGame.id}`}
-          data-reveal="bottom"
         >
           {activeGame.matches.map((match, index) => {
             const youtubeHref = match.socials.youtube ?? '#';
@@ -103,12 +102,16 @@ export default function UpcomingSection() {
                 className="upcoming-item"
                 data-active={index === 0 ? 'primary' : undefined}
               >
-                <div className="upcoming-card left has-before">
+                <div
+                  className="upcoming-card left has-before"
+                  data-reveal="left"
+                >
                   <Image
                     src={match.leftTeam.logo}
-                    width={86}
-                    height={81}
+                    width={200}
+                    height={195}
                     loading="lazy"
+                    quality={100}
                     alt={match.leftTeam.name}
                     className="card-banner"
                   />
@@ -120,7 +123,7 @@ export default function UpcomingSection() {
                   </div>
                 </div>
 
-                <div className="upcoming-time">
+                <div className="upcoming-time" data-reveal="bottom">
                   <time className="time" dateTime={match.time}>
                     {match.time}
                   </time>
@@ -148,12 +151,16 @@ export default function UpcomingSection() {
                   </div>
                 </div>
 
-                <div className="upcoming-card right has-before">
+                <div
+                  className="upcoming-card right has-before"
+                  data-reveal="right"
+                >
                   <Image
                     src={match.rightTeam.logo}
-                    width={86}
-                    height={81}
+                    width={200}
+                    height={195}
                     loading="lazy"
+                    quality={100}
                     alt={match.rightTeam.name}
                     className="card-banner"
                   />
@@ -176,7 +183,6 @@ export default function UpcomingSection() {
             data-btn
           >
             See full results
-            <ion-icon name="arrow-forward-outline"></ion-icon>
           </Link>
         </div>
       </div>

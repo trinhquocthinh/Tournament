@@ -79,109 +79,193 @@
   }
 
   .upcoming-list {
-    display: grid;
-    gap: 24px;
-    margin-block-end: 48px;
-
-    @include tablet-up {
-      gap: 32px;
-    }
+    margin-block-end: 90px;
   }
 
   .upcoming-item {
-    display: grid;
-    gap: 18px;
-    padding: 28px 22px;
-    border-radius: $radius-5;
-    background: $bg-oxford-blue-alpha-95;
-    border: 1px solid $border-space-cadet;
-    box-shadow: 0 12px 25px rgba(6, 4, 29, 0.35);
-    align-items: center;
-
-    &[data-active='primary'] {
-      border-color: $text-purple;
-      box-shadow: 0 16px 35px rgba(118, 37, 204, 0.3);
+    &:not(:last-child) {
+      margin-block-end: 90px;
     }
 
-    @include tablet-up {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      padding: 32px 40px;
+    .social-wrapper {
+      justify-content: center;
     }
 
     @include laptop-up {
-      gap: 24px;
+      display: grid;
+      grid-template-columns: 1fr 0.5fr 1fr;
+      align-items: center;
     }
   }
 
   .upcoming-card {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 14px;
-    text-align: center;
+
+    &::before {
+      top: 50%;
+      background-image: $gradient-1;
+      transform: translateY(-50%);
+      width: 90%;
+      height: 80px;
+      z-index: -1;
+      opacity: 0.3;
+      border-radius: $radius-5;
+
+      @include tablet-up {
+        height: 110px;
+      }
+    }
+
+    &.left {
+      &::before {
+        right: 0px;
+        clip-path: $clip-path-4;
+      }
+
+      .card-title {
+        margin-inline-end: 50px;
+        text-align: right;
+      }
+
+      .card-meta {
+        clip-path: $clip-path-5;
+
+        @include mobile-up {
+          left: auto;
+          right: -15%;
+        }
+
+        @include tablet-up {
+          right: -10%;
+        }
+      }
+    }
+
+    &.right {
+      &::before {
+        left: 0px;
+        clip-path: $clip-path-6;
+      }
+
+      .card-banner {
+        order: 1;
+      }
+
+      .card-title {
+        margin-inline-start: 50px;
+        text-align: left;
+      }
+
+      .card-meta {
+        clip-path: $clip-path-7;
+
+        @include mobile-up {
+          left: 25%;
+        }
+
+        @include tablet-up {
+          left: 20%;
+        }
+
+        @include laptop-up {
+          left: 50%;
+        }
+
+        @include desktop-up {
+          left: 35%;
+        }
+      }
+    }
 
     .card-banner {
-      width: 86px;
-      height: 81px;
-      object-fit: contain;
+      width: 30%;
+
+      @include desktop-up {
+        max-height: 180px;
+        width: auto;
+      }
     }
 
     .card-title {
-      font-size: $font-size-4;
       text-transform: uppercase;
-      letter-spacing: 2px;
+
+      @include tablet-up {
+        font-size: 2.8rem;
+      }
     }
 
     .card-meta {
-      color: $text-gainsboro;
-      font-size: $font-size-8;
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-image: $gradient-1;
+      width: max-content;
+      font-size: $font-size-7;
+      font-weight: $font-weight-semi-bold;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      padding: 6px 20px;
+      border-radius: $radius-3;
+
+      @include tablet-up {
+        bottom: 20px;
+        padding-block: 12px;
+      }
+
+      @include laptop-up {
+        left: 50%;
+        bottom: -30px;
+        transform: translateX(-50%);
+      }
+
+      @include desktop-up {
+        bottom: 0px;
+      }
     }
   }
 
   .upcoming-time {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding-block: 12px;
-    border-block: 1px dashed $border-purple-alpha-30;
+    margin-block: 50px 30px;
 
-    @include tablet-up {
-      padding-block: 0;
-      border-block: none;
-      border-inline: 1px dashed $border-purple-alpha-30;
-      min-height: 100%;
+    @include laptop-up {
+      margin-block: 0px;
+    }
+
+    :is(.time, .date) {
+      text-align: center;
     }
 
     .time {
-      font-size: $font-size-2;
-      font-family: $font-family-oxanium;
-      font-weight: $font-weight-bold;
-      letter-spacing: 4px;
       color: $text-white;
+      font-size: $font-size-1;
+      font-weight: $font-weight-bold;
+      line-height: 1;
+
+      @include tablet-up {
+        font-size: 5rem;
+      }
+
+      @include desktop-up {
+        font-size: 6.2rem;
+      }
     }
 
     .date {
       font-size: $font-size-7;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: $text-champagne-pink;
+      font-weight: $font-weight-semi-bold;
+      margin-block: 5px;
     }
 
     .social-wrapper {
       display: flex;
-      gap: 16px;
+      align-items: center;
+      gap: 10px;
     }
 
     .social-link {
-      @include flex-center;
-      width: 42px;
-      height: 42px;
-      border-radius: $radius-circle;
-      background: $bg-oxford-blue;
+      font-size: 2.5rem;
       color: $text-white;
       transition: $transition-1;
 
