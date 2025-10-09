@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
-import HeroSection from '@/components/sections/HeroSection';
-import JoinSection from '@/components/sections/JoinSection';
-import NewsSection from '@/components/sections/NewsSection';
-import UpcomingSection from '@/components/sections/UpcomingSection';
+import HeroSection from '@/components/sections/home/HeroSection';
+import JoinSection from '@/components/sections/home/JoinSection';
+import NewsSection from '@/components/sections/home/NewsSection';
+import UpcomingSection from '@/components/sections/home/UpcomingSection';
 
 export const metadata: Metadata = {
   title: 'Home',
