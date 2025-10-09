@@ -228,6 +228,15 @@ body {
   padding-block: $section-spacing;
 }
 
+:is(dir, dl, menu, ol, ul) ul {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+:is(dir, menu, ol, ul) ul {
+  list-style-type: circle;
+}
+
 [data-reveal] {
   opacity: 0;
   transition: $transition-2;
@@ -282,5 +291,9 @@ body {
 @include desktop-up {
   .container {
     max-width: 1140px;
+  }
+
+  .section-text {
+    margin-block-end: 60px;
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import HeroSection from '@/components/sections/HeroSection';
 import UpcomingSection from '@/components/sections/UpcomingSection';
+import NewsSection from '@/components/sections/NewsSection';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -13,6 +14,7 @@ export default function HomePage() {
     <article>
       <HeroSection />
       <UpcomingSection />
+      <NewsSection />
     </article>
   );
 }

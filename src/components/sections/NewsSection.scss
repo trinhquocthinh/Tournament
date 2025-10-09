@@ -1,0 +1,107 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.news {
+}
+
+.news-list {
+  display: grid;
+  gap: 30px;
+
+  @include tablet-up {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include laptop-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.news-card {
+  background-color: $bg-oxford-blue-alpha-90;
+  box-shadow: $shadow;
+
+  :is(.card-meta-list, .card-meta-item) {
+    display: flex;
+    align-items: center;
+  }
+
+  .card-content {
+    position: relative;
+    padding: 30px;
+  }
+
+  .card-tag {
+    position: absolute;
+    bottom: 100%;
+    left: 0px;
+    background-image: $gradient-1;
+    color: $text-white;
+    font-size: $font-size-8;
+    font-weight: $font-weight-semi-bold;
+    text-transform: uppercase;
+    height: 30px;
+    line-height: 32px;
+    clip-path: $clip-path-3;
+    padding-inline: 20px;
+  }
+
+  .card-meta-list {
+    flex-wrap: wrap;
+    gap: 5px 10px;
+  }
+
+  .card-meta-item {
+    gap: 5px;
+
+    ion-icon {
+      color: $text-purple;
+    }
+  }
+
+  .card-meta-text,
+  .link {
+    color: $text-champagne-pink;
+    font-size: $font-size-7;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    padding-top: 3px;
+  }
+
+  .h3 {
+    margin-block: 15px 10px;
+  }
+
+  .card-title {
+    display: inline;
+    background-image: linear-gradient(to left, $bg-purple, $bg-purple);
+    background-repeat: no-repeat;
+    background-size: 0% 4px;
+    background-position: left bottom;
+    transition: $transition-2;
+    &:is(:hover, :focus-visible) {
+      background-size: 100% 4px;
+    }
+  }
+
+  .link {
+    max-width: max-content;
+    margin-block-start: 15px;
+    padding-inline-start: 30px;
+    padding-top: 0;
+    transition: $transition-1;
+
+    &:is(:hover, :focus-visible) {
+      color: $text-purple;
+    }
+
+    &::before {
+      top: 50%;
+      left: 0px;
+      transform: translateY(-100%);
+      width: 20px;
+      height: 4px;
+      background-color: $bg-purple;
+    }
+  }
+}
