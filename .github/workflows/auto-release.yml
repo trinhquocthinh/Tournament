@@ -48,7 +48,7 @@ jobs:
           echo "Generating release notes for $TAG (version: $VERSION)"
           
           # Create a Node.js script to extract changelog content more reliably
-          cat > extract_notes.js << 'EOF'
+          cat > extract_notes.cjs << 'EOF'
           const fs = require('fs');
           const tag = process.argv[2];
           const version = process.argv[3];
@@ -123,7 +123,7 @@ jobs:
           EOF
           
           # Extract release notes using Node.js script
-          node extract_notes.js "$TAG" "$VERSION" > release_notes.md
+          node extract_notes.cjs "$TAG" "$VERSION" > release_notes.md
           
           echo "Generated release notes:"
           cat release_notes.md
