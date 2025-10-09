@@ -19,19 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [v1.0.4] - 2025-10-09
-
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
+## [v1.0.5] - 2025-10-09
 
 ### Fixed
 
-### Security
+- Build and release
 
 ## [1.0.1] - 2025-10-09
 
