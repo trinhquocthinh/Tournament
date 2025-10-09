@@ -2,6 +2,125 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
+
+/**
+ * Get git commits since the last tag
+ */
+function getCommitsSinceLastTag() {
+  try {
+    // Get the last tag
+    const lastTag = execSync(
+      'git describe --tags --abbrev=0 2>/dev/null || echo ""',
+      {
+        encoding: 'utf8',
+      }
+    ).trim();
+
+    // Get commits since last tag or all commits if no tag exists
+    const gitCommand = lastTag
+      ? `git log ${lastTag}..HEAD --pretty=format:"%s"`
+      : 'git log --pretty=format:"%s"';
+
+    const commits = execSync(gitCommand, { encoding: 'utf8' })
+      .trim()
+      .split('\n')
+      .filter(Boolean);
+
+    return commits;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(
+      '⚠️  Could not fetch git commits, using manual changelog entries'
+    );
+    return [];
+  }
+}
+
+/**
+ * Parse commits and categorize them based on conventional commit prefixes
+ */
+function categorizeCommits(commits) {
+  const categories = {
+    Added: [],
+    Changed: [],
+    Deprecated: [],
+    Removed: [],
+    Fixed: [],
+    Security: [],
+  };
+
+  const prefixMap = {
+    'feat:': 'Added',
+    'feature:': 'Added',
+    'add:': 'Added',
+    'added:': 'Added',
+    'fix:': 'Fixed',
+    'fixed:': 'Fixed',
+    'bugfix:': 'Fixed',
+    'change:': 'Changed',
+    'changed:': 'Changed',
+    'update:': 'Changed',
+    'updated:': 'Changed',
+    'refactor:': 'Changed',
+    'perf:': 'Changed',
+    'style:': 'Changed',
+    'remove:': 'Removed',
+    'removed:': 'Removed',
+    'delete:': 'Removed',
+    'deleted:': 'Removed',
+    'deprecate:': 'Deprecated',
+    'deprecated:': 'Deprecated',
+    'security:': 'Security',
+    'sec:': 'Security',
+  };
+
+  commits.forEach(commit => {
+    // Skip version bump commits and merge commits
+    if (
+      commit.match(/^(chore|release|version|bump|merge)/i) ||
+      commit.startsWith('Merge ')
+    ) {
+      return;
+    }
+
+    const lowerCommit = commit.toLowerCase();
+    let categorized = false;
+
+    // Check for prefix match
+    for (const [prefix, category] of Object.entries(prefixMap)) {
+      if (lowerCommit.startsWith(prefix)) {
+        const message = commit.substring(prefix.length).trim();
+        const capitalizedMessage =
+          message.charAt(0).toUpperCase() + message.slice(1);
+        categories[category].push(capitalizedMessage);
+        categorized = true;
+        break;
+      }
+    }
+
+    // If no prefix found, try to detect from content
+    if (!categorized) {
+      if (lowerCommit.match(/\b(add|added|new|implement|create)\b/i)) {
+        categories.Added.push(commit);
+      } else if (lowerCommit.match(/\b(fix|fixed|resolve|patch|bug)\b/i)) {
+        categories.Fixed.push(commit);
+      } else if (
+        lowerCommit.match(/\b(update|change|modify|improve|refactor)\b/i)
+      ) {
+        categories.Changed.push(commit);
+      } else if (lowerCommit.match(/\b(remove|delete|drop)\b/i)) {
+        categories.Removed.push(commit);
+      } else if (lowerCommit.match(/\b(security|vulnerability|cve)\b/i)) {
+        categories.Security.push(commit);
+      } else if (lowerCommit.match(/\b(deprecate)\b/i)) {
+        categories.Deprecated.push(commit);
+      }
+    }
+  });
+
+  return categories;
+}
 
 function updateChangelog(newVersion) {
   const changelogPath = path.join(process.cwd(), 'CHANGELOG.md');
@@ -38,21 +157,65 @@ function updateChangelog(newVersion) {
     nextVersionIndex = lines.length;
   }
 
-  // Extract unreleased content (excluding the [Unreleased] header)
+  // Get commits and categorize them
+  const commits = getCommitsSinceLastTag();
+  const gitCategories = categorizeCommits(commits);
+
+  // Extract existing unreleased content (excluding the [Unreleased] header)
   const unreleasedContent = lines.slice(unreleasedIndex + 1, nextVersionIndex);
 
-  // Check if there's actual content in the unreleased section
-  const hasContent = unreleasedContent.some(
-    line =>
-      line.trim() &&
-      !line.match(/^### (Added|Changed|Deprecated|Removed|Fixed|Security)$/)
-  );
+  // Parse existing unreleased content by category
+  const existingCategories = {
+    Added: [],
+    Changed: [],
+    Deprecated: [],
+    Removed: [],
+    Fixed: [],
+    Security: [],
+  };
 
-  // Create new version section
-  const newVersionSection = [
-    `## [${newVersion}] - ${currentDate}`,
-    ...unreleasedContent,
-  ];
+  let currentCategory = '';
+  unreleasedContent.forEach(line => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('### ')) {
+      const category = trimmed.substring(4);
+      if (existingCategories.hasOwnProperty(category)) {
+        currentCategory = category;
+      }
+    } else if (trimmed.startsWith('- ') && currentCategory) {
+      existingCategories[currentCategory].push(trimmed.substring(2));
+    }
+  });
+
+  // Merge git commits with existing entries (avoid duplicates)
+  const mergedCategories = {};
+  Object.keys(existingCategories).forEach(category => {
+    const combined = [
+      ...existingCategories[category],
+      ...gitCategories[category],
+    ];
+    // Remove duplicates (case-insensitive comparison)
+    mergedCategories[category] = [
+      ...new Set(combined.map(item => item.trim())),
+    ].filter(Boolean);
+  });
+
+  // Build new version section with categorized changes
+  const newVersionSection = [`## [${newVersion}] - ${currentDate}`, ''];
+
+  let hasContent = false;
+  ['Added', 'Changed', 'Fixed', 'Removed', 'Deprecated', 'Security'].forEach(
+    category => {
+      if (mergedCategories[category].length > 0) {
+        hasContent = true;
+        newVersionSection.push(`### ${category}`, '');
+        mergedCategories[category].forEach(item => {
+          newVersionSection.push(`- ${item}`);
+        });
+        newVersionSection.push('');
+      }
+    }
+  );
 
   // Create new unreleased section
   const newUnreleasedSection = [
@@ -86,10 +249,12 @@ function updateChangelog(newVersion) {
   if (hasContent) {
     // eslint-disable-next-line no-console
     console.log(`✅ CHANGELOG.md updated with version ${newVersion}`);
+    // eslint-disable-next-line no-console
+    console.log(`📝 Processed ${commits.length} commits from git history`);
   } else {
     // eslint-disable-next-line no-console
     console.log(
-      `✅ CHANGELOG.md updated with version ${newVersion} (no unreleased changes found)`
+      `✅ CHANGELOG.md updated with version ${newVersion} (no changes found)`
     );
   }
 }
