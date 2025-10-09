@@ -286,6 +286,11 @@ body {
   .container {
     max-width: 960px;
   }
+
+  .h2 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+  }
 }
 
 @include desktop-up {

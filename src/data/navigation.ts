@@ -14,7 +14,7 @@ export const navLinks: NavLink[] = [
     label: 'news',
   },
   {
-    href: '/#blogs',
+    href: '/#join',
     label: 'contact',
   },
 ];

@@ -1,0 +1,166 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.join {
+  .section-subtitle {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  &-container {
+    display: grid;
+    align-items: stretch;
+    background-color: $bg-oxford-blue-alpha-90;
+    box-shadow: $shadow;
+    gap: 40px;
+    border: 1px solid $border-purple-alpha-30;
+    border-radius: $radius-5;
+    padding: clamp(30px, 5vw, 60px);
+
+    @include tablet-up {
+      padding: clamp(40px, 4vw, 70px);
+    }
+
+    @include laptop-up {
+      grid-template-columns: minmax(0px, 0.95fr) minmax(0px, 1.05fr);
+      gap: 50px;
+    }
+
+    @include desktop-up {
+      gap: 60px;
+      padding: 70px 80px;
+    }
+  }
+
+  &-content {
+    .section-title {
+      margin-block: 18px 20px;
+    }
+
+    .section-text {
+      max-width: 50ch;
+      color: $text-gainsboro;
+
+      @include laptop-up {
+        max-width: 55ch;
+      }
+    }
+  }
+
+  &-benefits {
+    display: grid;
+    margin-block-start: 30px;
+    gap: 16px;
+  }
+
+  &-benefit {
+    display: flex;
+    align-items: flex-end;
+    background-color: $bg-oxford-blue-alpha-80;
+    font-size: $font-size-5;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 1px solid $border-purple-alpha-30;
+    border-radius: $radius-5;
+
+    ion-icon {
+      color: $text-purple;
+      font-size: 2.6rem;
+    }
+  }
+
+  &-form {
+    display: grid;
+    background-color: $bg-oxford-blue-alpha-95;
+    box-shadow: $shadow;
+    gap: 20px;
+    padding: clamp(24px, 4vw, 40px);
+    border: 1px solid $border-purple-alpha-30;
+    border-radius: $radius-5;
+
+    @include desktop-up {
+      padding: 48px 50px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+
+      @include tablet-up {
+        grid-template-columns: repeat(2, minmax(0px, 1fr));
+      }
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+
+      &.full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .field-label {
+      font-size: $font-size-7;
+      font-weight: $font-weight-semi-bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $text-champagne-pink;
+    }
+
+    :is(input, textarea, select) {
+      background-color: $bg-oxford-blue-alpha-90;
+      color: $text-gainsboro;
+      padding: 14px 16px;
+      border-radius: $radius-5;
+      border: 1px solid $border-space-cadet;
+      transition:
+        border-color $transition-1,
+        box-shadow $transition-1;
+      min-height: 58px;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $bg-purple-alpha-30;
+        border-color: $text-purple;
+      }
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white'%3E%3Cpath d='M4 6l4 4 4-4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 12px;
+      background-position: right 16px center;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .btn {
+      justify-self: flex-start;
+    }
+  }
+
+  .form-consent {
+    display: flex;
+    align-items: flex-start;
+    font-size: $font-size-7;
+    line-height: 1.5;
+    color: $text-gainsboro;
+    gap: 12px;
+
+    input[type='checkbox'] {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: $text-purple;
+      min-height: unset;
+    }
+  }
+}

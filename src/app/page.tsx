@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
 import HeroSection from '@/components/sections/HeroSection';
-import UpcomingSection from '@/components/sections/UpcomingSection';
+import JoinSection from '@/components/sections/JoinSection';
 import NewsSection from '@/components/sections/NewsSection';
+import UpcomingSection from '@/components/sections/UpcomingSection';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <article>
       <HeroSection />
+      <JoinSection />
       <UpcomingSection />
       <NewsSection />
     </article>
