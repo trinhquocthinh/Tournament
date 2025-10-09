@@ -1,0 +1,123 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.article-details {
+  padding-block: clamp(60px, 12vw, 90px);
+  background: linear-gradient(
+    180deg,
+    rgba(33, 21, 61, 0.7) 0%,
+    rgba(10, 7, 20, 0.95) 100%
+  );
+}
+
+.article-layout {
+  display: grid;
+  gap: 50px;
+
+  @include laptop-up {
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 0.85fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  @include desktop-up {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.95fr);
+    gap: 72px;
+    align-items: start;
+  }
+}
+
+.article-body {
+  background-color: $bg-oxford-blue-alpha-90;
+  border: 1px solid $border-purple-alpha-30;
+  border-radius: $radius-5;
+  box-shadow: $shadow;
+  padding: clamp(28px, 4vw, 40px);
+
+  p {
+    margin-block-end: 20px;
+    color: $text-gainsboro;
+  }
+
+  h2 {
+    color: $text-white;
+    margin-block: 30px 15px;
+    font-size: $font-size-2;
+
+    @include tablet-up {
+      font-size: $font-size-1;
+    }
+  }
+
+  blockquote {
+    background-color: $bg-oxford-blue-alpha-80;
+    border-left: 4px solid $bg-purple;
+    padding: 25px 30px;
+    margin-block: 30px;
+    position: relative;
+    font-style: italic;
+    color: $text-white;
+    font-size: $font-size-5;
+
+    &::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 4rem;
+      color: $text-purple;
+      opacity: 0.3;
+    }
+  }
+
+  a {
+    color: $text-white;
+
+    &:is(:hover, :focus-visible) {
+      color: $text-white;
+    }
+  }
+}
+
+.article-banner {
+  border-radius: $radius-5;
+  overflow: hidden;
+  border: 1px solid $border-purple-alpha-30;
+  margin-block-end: 20px;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.article-inline {
+  margin-block: 30px;
+  border-radius: $radius-5;
+  overflow: hidden;
+  box-shadow: $shadow;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  figcaption {
+    background-color: $bg-oxford-blue-alpha-90;
+    padding: 15px 20px;
+    font-size: $font-size-7;
+    color: $text-gainsboro;
+    font-style: italic;
+  }
+}
+
+.article-cta {
+  margin-block-start: 40px;
+  text-align: center;
+
+  @include tablet-up {
+    text-align: left;
+  }
+}

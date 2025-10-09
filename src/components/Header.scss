@@ -18,8 +18,7 @@
   padding-block: 18px;
   z-index: 4;
   transition: $transition-1;
-  background-color: $bg-oxford-blue-alpha-95;
-  box-shadow: 0 18px 40px -25px hsla(240, 63%, 13%, 0.9);
+  background-color: transparent;
 
   .container {
     display: flex;
@@ -46,6 +45,8 @@
 
   &.active {
     position: fixed;
+    background-color: $bg-oxford-blue-alpha-95;
+    box-shadow: 0 18px 40px -25px hsla(240, 63%, 13%, 0.9);
     animation: slideDown 300ms ease forwards;
   }
 }
