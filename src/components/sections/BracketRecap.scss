@@ -1,0 +1,83 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.bracket-recap {
+  display: grid;
+  gap: 30px;
+}
+
+.recap-card {
+  background-color: $bg-oxford-blue-alpha-80;
+  border: 1px solid $border-purple-alpha-30;
+  border-radius: $radius-5;
+  padding: 30px;
+  box-shadow: $shadow;
+
+  h2 {
+    color: $text-white;
+    margin-block-end: 20px;
+    padding-block-end: 15px;
+    border-bottom: 2px solid $border-purple-alpha-30;
+  }
+
+  ul {
+    display: grid;
+    gap: 16px;
+    list-style: none;
+  }
+
+  li {
+    font-size: $font-size-7;
+    line-height: 1.8;
+    padding: 10px 0;
+    border-bottom: 1px solid hsla(240, 63%, 13%, 0.5);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    span {
+      color: $text-purple;
+      font-weight: $font-weight-semi-bold;
+      display: inline-block;
+      min-width: 200px;
+    }
+  }
+
+  p {
+    line-height: 1.8;
+    margin-block-end: 20px;
+    color: $text-gainsboro;
+  }
+
+  .btn {
+    margin-block-start: 20px;
+    min-width: 100%;
+  }
+}
+
+@include tablet-up {
+  .bracket-recap {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .recap-card {
+    padding: 35px;
+
+    li span {
+      min-width: 220px;
+    }
+  }
+}
+
+@include laptop-up {
+  .recap-card {
+    padding: 40px;
+
+    .btn {
+      min-width: auto;
+      max-width: max-content;
+    }
+  }
+}

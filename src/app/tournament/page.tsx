@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
 
+import BracketHero from '@/components/sections/BracketHero';
+import BracketPanels from '@/components/sections/BracketPanels';
+import BracketRecap from '@/components/sections/BracketRecap';
+import { TournamentProvider } from '@/contexts/TournamentContext';
+
 export const metadata: Metadata = {
   title: 'Tournament Bracket Hub',
   description:
@@ -8,16 +13,17 @@ export const metadata: Metadata = {
 
 export default function TournamentPage() {
   return (
-    <article>
-      <section className="bracket-hero has-before">
-        <div className="container">
-          <h1 className="h1 title">Tournament Masters Bracket Hub</h1>
-          <p className="section-text">
-            Dive into every bracket across Valorant Clash, Apex Legends Cup, and
-            League of Heroes Gauntlet.
-          </p>
-        </div>
-      </section>
-    </article>
+    <TournamentProvider>
+      <article>
+        <BracketHero />
+
+        <section className="bracket-section" aria-label="Bracket overview">
+          <div className="container">
+            <BracketPanels />
+            <BracketRecap />
+          </div>
+        </section>
+      </article>
+    </TournamentProvider>
   );
 }

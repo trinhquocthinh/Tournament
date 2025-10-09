@@ -1,0 +1,251 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+
+.bracket-section {
+  padding-block: 60px;
+}
+
+.bracket-section .container {
+  display: grid;
+  gap: 50px;
+}
+
+.bracket-panels {
+  position: relative;
+  overflow-x: auto;
+  padding-block: 20px;
+}
+
+.bracket-grid {
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px 20px;
+  min-width: fit-content;
+
+  &.active {
+    display: grid;
+  }
+
+  &[hidden] {
+    display: none !important;
+  }
+}
+
+.bracket-round {
+  display: grid;
+  gap: 30px;
+  align-content: start;
+}
+
+.round-title {
+  color: $text-purple;
+  font-size: $font-size-6;
+  font-weight: $font-weight-semi-bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.match-card {
+  position: relative;
+  background-color: $bg-oxford-blue-alpha-80;
+  border: 1px solid $border-purple-alpha-30;
+  border-radius: $radius-5;
+  padding: 16px;
+  transition: $transition-1;
+  cursor: pointer;
+
+  &:is(:hover, :focus-within) {
+    border-color: $bg-purple;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px hsla(267, 100%, 63%, 0.2);
+  }
+
+  &.champion {
+    border-color: $bg-purple;
+    background-image: linear-gradient(
+      135deg,
+      $bg-oxford-blue-alpha-90,
+      $bg-oxford-blue-alpha-80
+    );
+  }
+
+  // Bracket connectors
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: $border-purple-alpha-30;
+  }
+
+  // Right connector for semifinals
+  &[data-connector='right']::after {
+    top: 50%;
+    right: -20px;
+    width: 20px;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  // Down-right connector for quarterfinals (top matches)
+  &[data-connector='down-right']::before {
+    top: 50%;
+    right: -20px;
+    width: 20px;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  &[data-connector='down-right']::after {
+    top: 50%;
+    right: -20px;
+    width: 2px;
+    height: calc(100% + 30px);
+  }
+
+  // Up-right connector for quarterfinals (bottom matches)
+  &[data-connector='up-right']::before {
+    top: 50%;
+    right: -20px;
+    width: 20px;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  &[data-connector='up-right']::after {
+    bottom: 50%;
+    right: -20px;
+    width: 2px;
+    height: calc(100% + 30px);
+  }
+}
+
+.match-stage {
+  color: $text-purple;
+  font-size: $font-size-8;
+  font-weight: $font-weight-semi-bold;
+  text-transform: uppercase;
+  margin-block-end: 12px;
+}
+
+.match-team {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background-color: hsla(240, 63%, 13%, 0.5);
+  border-radius: $radius-3;
+  margin-block-end: 8px;
+  transition: $transition-1;
+
+  &:last-of-type {
+    margin-block-end: 0;
+  }
+
+  &.win {
+    background-color: $bg-purple-alpha-30;
+    color: $text-white;
+
+    .team-score {
+      color: $text-purple;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .team-name {
+    flex: 1;
+    font-size: $font-size-7;
+    font-weight: $font-weight-semi-bold;
+  }
+
+  .team-score {
+    font-size: $font-size-6;
+    font-weight: $font-weight-semi-bold;
+    min-width: 30px;
+    text-align: center;
+  }
+}
+
+.match-meta {
+  margin-block-start: 12px;
+  padding-block-start: 12px;
+  border-top: 1px solid $border-purple-alpha-30;
+  color: $text-champagne-pink;
+  font-size: $font-size-8;
+  text-align: center;
+}
+
+// Responsive improvements
+@include tablet-up {
+  .bracket-grid {
+    gap: 60px 40px;
+  }
+
+  .bracket-round {
+    gap: 40px;
+  }
+
+  .match-card {
+    padding: 20px;
+  }
+
+  // Better connectors on larger screens
+  .match-card[data-connector='right']::after {
+    right: -40px;
+    width: 40px;
+  }
+
+  .match-card[data-connector='down-right']::before,
+  .match-card[data-connector='up-right']::before {
+    right: -40px;
+    width: 40px;
+  }
+
+  .match-card[data-connector='down-right']::after {
+    right: -40px;
+    height: calc(100% + 40px);
+  }
+
+  .match-card[data-connector='up-right']::after {
+    right: -40px;
+    height: calc(100% + 40px);
+  }
+}
+
+@include laptop-up {
+  .bracket-panels {
+    overflow-x: visible;
+  }
+
+  .bracket-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px 60px;
+  }
+
+  .match-card[data-connector='right']::after {
+    right: -60px;
+    width: 60px;
+  }
+
+  .match-card[data-connector='down-right']::before,
+  .match-card[data-connector='up-right']::before {
+    right: -60px;
+    width: 60px;
+  }
+
+  .match-card[data-connector='down-right']::after {
+    right: -60px;
+    height: calc(100% + 80px);
+  }
+
+  .match-card[data-connector='up-right']::after {
+    right: -60px;
+    height: calc(100% + 80px);
+  }
+
+  // Add hover effect on connectors
+  .match-card:hover::before,
+  .match-card:hover::after {
+    background-color: $bg-purple;
+  }
+}
