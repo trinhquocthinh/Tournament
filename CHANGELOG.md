@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [v1.0.6] - 2025-10-10
+## [v1.0.7] - 2025-10-10
 
 ### Added
 
@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Guide deploy github pages
+- Update url for tournament page, hidden cursor in mobile/tablet
 
 ### Fixed
 
@@ -37,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deploy and release
 - Update base url of images
 - BasePath for public files on GitHub Pages
+- Scss link
 
 ## [1.0.1] - 2025-10-09
 
