@@ -49,7 +49,10 @@ export default function RootLayout({
           async
         />
       </head>
-      <body suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        style={{ backgroundImage: 'url(assets/images/body-bg.jpg)' }}
+      >
         <Layout>{children}</Layout>
       </body>
     </html>
