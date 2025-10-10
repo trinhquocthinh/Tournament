@@ -5,7 +5,7 @@ import { tournamentBrackets } from '@/data/brackets';
 
 import BracketGrid from './BracketGrid';
 
-import '@/components/sections/BracketGrid.scss';
+import './BracketGrid.scss';
 
 export default function BracketPanels() {
   const { activeTab } = useTournamentContext();
