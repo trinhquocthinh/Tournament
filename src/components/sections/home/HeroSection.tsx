@@ -29,7 +29,7 @@ export default function HeroSection() {
 
         <div className="hero-banner">
           <Image
-            src="/assets/images/hero-banner.png"
+            src="assets/images/hero-banner.png"
             width={850}
             height={414}
             alt="hero banner"
@@ -38,7 +38,7 @@ export default function HeroSection() {
           />
 
           <Image
-            src="/assets/images/hero-banner-bg.png"
+            src="assets/images/hero-banner-bg.png"
             width={1000}
             height={600}
             alt=""

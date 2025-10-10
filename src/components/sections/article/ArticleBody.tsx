@@ -21,7 +21,7 @@ export default function ArticleBody({ content }: ArticleBodyProps) {
         style={{ '--width': 1200, '--height': 675 } as React.CSSProperties}
       >
         <Image
-          src="/assets/images/news-1.jpg"
+          src="assets/images/news-1.jpg"
           width={1200}
           height={675}
           alt="Valorant team celebrating victory"
@@ -66,7 +66,7 @@ export default function ArticleBody({ content }: ArticleBodyProps) {
 
           <figure className="article-inline">
             <Image
-              src="/assets/images/news-2.jpg"
+              src="assets/images/news-2.jpg"
               width={600}
               height={400}
               alt="Pro player strategizing at a gaming setup"

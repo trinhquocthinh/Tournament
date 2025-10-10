@@ -9,7 +9,7 @@ export const newsArticles: NewsArticle[] = [
     date: '2022-01-01',
     author: 'Elliot Alderson',
     category: 'Business',
-    image: '/assets/images/news-1.jpg',
+    image: 'assets/images/news-1.jpg',
   },
   {
     slug: 'startup-initiation-guide',
@@ -19,7 +19,7 @@ export const newsArticles: NewsArticle[] = [
     date: '2022-01-01',
     author: 'Elliot Alderson',
     category: 'Startup',
-    image: '/assets/images/news-2.jpg',
+    image: 'assets/images/news-2.jpg',
   },
   {
     slug: 'financial-expert-support',
@@ -29,6 +29,6 @@ export const newsArticles: NewsArticle[] = [
     date: '2022-01-01',
     author: 'Elliot Alderson',
     category: 'Finance',
-    image: '/assets/images/news-3.jpg',
+    image: 'assets/images/news-3.jpg',
   },
 ];

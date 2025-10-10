@@ -29,7 +29,7 @@ export default function Header() {
       <div className="container">
         <Link href="/" className="logo">
           <Image
-            src="/assets/images/logo.svg"
+            src="assets/images/logo.svg"
             width={110}
             height={53}
             alt="Tournament home"

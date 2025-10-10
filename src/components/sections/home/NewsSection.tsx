@@ -31,7 +31,7 @@ export default function NewsSection() {
                 }
               >
                 <Image
-                  src="/assets/images/news-1.jpg"
+                  src="assets/images/news-1.jpg"
                   width={600}
                   height={400}
                   loading="lazy"
@@ -94,7 +94,7 @@ export default function NewsSection() {
                 }
               >
                 <Image
-                  src="/assets/images/news-2.jpg"
+                  src="assets/images/news-2.jpg"
                   width={600}
                   height={400}
                   loading="lazy"
@@ -157,7 +157,7 @@ export default function NewsSection() {
                 }
               >
                 <Image
-                  src="/assets/images/news-3.jpg"
+                  src="assets/images/news-3.jpg"
                   width={600}
                   height={400}
                   loading="lazy"

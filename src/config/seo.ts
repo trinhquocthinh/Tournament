@@ -10,7 +10,7 @@ export const siteConfig: SEOConfig = {
   url:
     process.env.NEXT_PUBLIC_SITE_URL ||
     'https://trinhquocthinh.github.io/Tournament',
-  ogImage: '/assets/images/hero-banner.png',
+  ogImage: 'assets/images/hero-banner.png',
   twitterHandle: '@Tournament',
 };
 
