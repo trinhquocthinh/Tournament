@@ -19,11 +19,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [v1.0.5] - 2025-10-09
+## [v1.0.6] - 2025-10-10
+
+### Added
+
+- Deploy github pages
+- Tournament page successfully
+- Article page successfully
+
+### Changed
+
+- Guide deploy github pages
 
 ### Fixed
 
 - Build and release
+- Deploy and release
+- Update base url of images
+- BasePath for public files on GitHub Pages
 
 ## [1.0.1] - 2025-10-09
 
