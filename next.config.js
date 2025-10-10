@@ -4,8 +4,19 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// GitHub Pages deployment configuration
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+const repoName =
+  process.env.GITHUB_REPOSITORY?.split('/')[1] || 'tournament-website';
+const basePath = isGithubActions ? `/${repoName}` : '';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // GitHub Pages deployment settings
+  basePath,
+  assetPrefix: basePath,
+  output: 'export',
+  
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
@@ -18,10 +29,10 @@ const nextConfig = {
 
   // Image optimization
   images: {
+    unoptimized: true, // Required for static export
     formats: ['image/avif', 'image/webp'], // Modern image formats
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
     remotePatterns: [
       {
         protocol: 'https',
@@ -33,7 +44,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Security headers
+  // Security headers (not used in static export, but kept for reference)
   async headers() {
     return [
       {
@@ -93,7 +104,7 @@ const nextConfig = {
     includePaths: ['./src/styles'],
   },
 
-  // Redirects and rewrites
+  // Redirects and rewrites (not used in static export)
   async rewrites() {
     return [
       {
@@ -112,11 +123,10 @@ const nextConfig = {
   // Production source maps (disable for security, enable for debugging)
   productionBrowserSourceMaps: false,
 
-  // Experimental features for better performance
-  experimental: {
-    // Enable optimistic client-side navigation
-    optimisticClientCache: true,
-  },
+  // Disable experimental features for static export
+  // experimental: {
+  //   optimisticClientCache: true,
+  // },
 
   // TypeScript and ESLint configuration
   typescript: {
