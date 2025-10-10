@@ -4,13 +4,17 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-// GitHub Pages deployment configuration
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+const isGH = process.env.GITHUB_ACTIONS === 'true';
+
+// prefer explicit client-visible var if bạn muốn dùng trong code
+const publicBasePath =
+  process.env.NEXT_PUBLIC_BASE_PATH || (isGH && repoName ? `/${repoName}` : '');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: isGithubActions && repoName ? `/${repoName}` : '',
+  basePath: publicBasePath || '',
+  assetPrefix: publicBasePath || undefined,
   output: 'export',
 
   // Enable React strict mode for better development experience

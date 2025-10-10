@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="footer-brand">
             <Link href="/" className="logo">
               <Image
-                src="/assets/images/logo.svg"
+                src="assets/images/logo.svg"
                 width={150}
                 height={73}
                 alt="Tournament logo"
