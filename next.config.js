@@ -6,13 +6,11 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 // GitHub Pages deployment configuration
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Tournament';
-const basePath = isGithubActions ? `/${repoName}` : '';
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages deployment settings
-  basePath,
+  basePath: isGithubActions && repoName ? `/${repoName}` : '',
   assetPrefix: basePath,
   output: 'export',
 
