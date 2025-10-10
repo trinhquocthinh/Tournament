@@ -7,7 +7,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 // GitHub Pages deployment configuration
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 const repoName =
-  process.env.GITHUB_REPOSITORY?.split('/')[1] || 'tournament-website';
+  process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Tournament';
 const basePath = isGithubActions ? `/${repoName}` : '';
 
 /** @type {import('next').NextConfig} */
@@ -118,6 +118,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL || 'https://Tournament-agency.com',
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 
   // Production source maps (disable for security, enable for debugging)

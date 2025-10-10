@@ -8,6 +8,9 @@ import '@/styles/globals.scss';
 
 export const metadata: Metadata = defaultMetadata;
 
+// Get the base path from environment variable
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export default function RootLayout({
   children,
 }: {
@@ -27,8 +30,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* PWA Manifest */}
-        <link rel="manifest" href="/manifest.json" />
+        {/* PWA Manifest with basePath */}
+        <link rel="manifest" href={`${basePath}/manifest.json`} />
 
         {/* Favicon fallback */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

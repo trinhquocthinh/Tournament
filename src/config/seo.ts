@@ -7,7 +7,9 @@ export const siteConfig: SEOConfig = {
   siteName: 'Tournament - Epic Games Made For True Gamers',
   description:
     'Join Tournament esports team for competitive gaming tournaments, news, and community. Epic games made for true gamers.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    'https://trinhquocthinh.github.io/Tournament',
   ogImage: '/assets/images/hero-banner.png',
   twitterHandle: '@Tournament',
 };
@@ -72,5 +74,5 @@ export const defaultMetadata: Metadata = {
     shortcut: '/favicon.svg',
     apple: '/favicon.svg',
   },
-  manifest: '/manifest.json',
+  // Note: manifest is added in layout.tsx to handle basePath correctly
 };
