@@ -6,8 +6,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 // GitHub Pages deployment configuration
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
-const repoName =
-  process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Tournament';
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Tournament';
 const basePath = isGithubActions ? `/${repoName}` : '';
 
 /** @type {import('next').NextConfig} */
@@ -16,7 +15,7 @@ const nextConfig = {
   basePath,
   assetPrefix: basePath,
   output: 'export',
-  
+
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
