@@ -116,7 +116,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_SITE_URL:
       process.env.NEXT_PUBLIC_SITE_URL || 'https://Tournament-agency.com',
-    NEXT_PUBLIC_BASE_PATH: basePath,
+    NEXT_PUBLIC_BASE_PATH: isGithubActions && repoName ? `/${repoName}` : '',
   },
 
   // Production source maps (disable for security, enable for debugging)
