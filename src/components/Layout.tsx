@@ -1,5 +1,6 @@
 'use client';
 
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useReveal } from '@/hooks/useReveal';
 import type { LayoutProps } from '@/types';
 
@@ -10,6 +11,7 @@ import Header from './Header';
 
 export default function Layout({ children }: LayoutProps) {
   useReveal();
+  const isLaptopOrAbove = useMediaQuery('(min-width: 1024px)');
 
   return (
     <>
@@ -17,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
       <main id="top">{children}</main>
       <Footer />
       <BackToTop />
-      <CustomCursor />
+      {isLaptopOrAbove && <CustomCursor />}
     </>
   );
 }

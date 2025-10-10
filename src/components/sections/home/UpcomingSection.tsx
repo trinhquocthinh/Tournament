@@ -4,10 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { upcomingGames } from '@/data/matches';
+import useButtonRipple from '@/hooks/useButtonRipple';
 import { useTournamentTabs } from '@/hooks/useTournamentTabs';
 import './UpcomingSection.scss';
 
 export default function UpcomingSection() {
+  const { handleMouseMove } = useButtonRipple();
   const fallbackId = upcomingGames[0]?.id ?? 'default';
   const { activeTab, switchTab } = useTournamentTabs(fallbackId);
   const activeGame =
@@ -181,6 +183,7 @@ export default function UpcomingSection() {
             href="/tournament"
             className="btn btn-primary see-results"
             data-btn
+            onMouseMove={handleMouseMove}
           >
             See full results
           </Link>

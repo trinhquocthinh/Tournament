@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import BracketHero from '@/components/sections/BracketHero';
-import BracketPanels from '@/components/sections/BracketPanels';
-import BracketRecap from '@/components/sections/BracketRecap';
+import BracketHero from '@/components/sections/tournament/BracketHero';
+import BracketPanels from '@/components/sections/tournament/BracketPanels';
+import BracketRecap from '@/components/sections/tournament/BracketRecap';
 import { TournamentProvider } from '@/contexts/TournamentContext';
 
 export const metadata: Metadata = {

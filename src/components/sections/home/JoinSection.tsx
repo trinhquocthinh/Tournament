@@ -1,8 +1,11 @@
 'use client';
 
+import useButtonRipple from '@/hooks/useButtonRipple';
 import './JoinSection.scss';
 
 export default function JoinSection() {
+  const { handleMouseMove } = useButtonRipple();
+
   return (
     <section className="section join" id="join" aria-labelledby="join-label">
       <div className="container join-container">
@@ -116,7 +119,12 @@ export default function JoinSection() {
             </label>
           </div>
 
-          <button type="submit" className="btn" data-btn>
+          <button
+            type="submit"
+            className="btn"
+            data-btn
+            onMouseMove={handleMouseMove}
+          >
             Submit Application
           </button>
         </form>
