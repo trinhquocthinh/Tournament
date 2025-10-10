@@ -11,7 +11,6 @@ const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: isGithubActions && repoName ? `/${repoName}` : '',
-  assetPrefix: basePath,
   output: 'export',
 
   // Enable React strict mode for better development experience
